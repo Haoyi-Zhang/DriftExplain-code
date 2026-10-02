@@ -1,0 +1,139 @@
+[
+  {
+    "id": "access-control-wallet-constructor",
+    "category": "access-control",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/access_control/wallet_03_wrong_constructor.sol",
+    "source_path": "dataset/access_control/wallet_03_wrong_constructor.sol",
+    "annotated_lines": "19-20",
+    "anchor": "initWallet",
+    "required": [
+      {"canonical": "privileged_write", "raw": "public_owner_setter"}
+    ],
+    "forbidden": [
+      {"canonical": "authorization_guard", "raw": "owner_authorization"}
+    ],
+    "source_observation": "A public initializer assigns the privileged creator role without an authorization precondition."
+  },
+  {
+    "id": "arithmetic-timelock",
+    "category": "arithmetic",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/arithmetic/timelock.sol",
+    "source_path": "dataset/arithmetic/timelock.sol",
+    "annotated_lines": "22",
+    "anchor": "increaseLockTime",
+    "required": [
+      {"canonical": "arithmetic_update", "raw": "unchecked_locktime_addition"}
+    ],
+    "forbidden": [
+      {"canonical": "range_guard", "raw": "checked_arithmetic"}
+    ],
+    "source_observation": "The lock-time update uses an unchecked addition."
+  },
+  {
+    "id": "bad-randomness-lottery",
+    "category": "bad-randomness",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/bad_randomness/lottery.sol",
+    "source_path": "dataset/bad_randomness/lottery.sol",
+    "annotated_lines": "38,42",
+    "anchor": "makeBet",
+    "required": [
+      {"canonical": "miner_influenced_entropy", "raw": "block_number_randomness"}
+    ],
+    "forbidden": [
+      {"canonical": "trusted_entropy", "raw": "external_randomness"}
+    ],
+    "source_observation": "The outcome is derived from the block number."
+  },
+  {
+    "id": "denial-of-service-array-fill",
+    "category": "denial-of-service",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/denial_of_service/dos_simple.sol",
+    "source_path": "dataset/denial_of_service/dos_simple.sol",
+    "annotated_lines": "17-18",
+    "anchor": "ifillArray",
+    "required": [
+      {"canonical": "gas_sensitive_iteration", "raw": "bulk_storage_loop"}
+    ],
+    "forbidden": [
+      {"canonical": "amortized_iteration", "raw": "bounded_work_per_call"}
+    ],
+    "source_observation": "One call performs a large storage-writing loop."
+  },
+  {
+    "id": "front-running-reward-claim",
+    "category": "front-running",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/front_running/eth_tx_order_dependence_minimal.sol",
+    "source_path": "dataset/front_running/eth_tx_order_dependence_minimal.sol",
+    "annotated_lines": "23,31",
+    "anchor": "claimReward",
+    "required": [
+      {"canonical": "public_value_race", "raw": "public_solution_submission"}
+    ],
+    "forbidden": [
+      {"canonical": "commitment_guard", "raw": "commit_reveal_protocol"}
+    ],
+    "source_observation": "A public solution transaction directly determines who claims the reward."
+  },
+  {
+    "id": "reentrancy-token-bank",
+    "category": "reentrancy",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+    "source_path": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol",
+    "annotated_lines": "94",
+    "anchor": "WithdrawToHolder",
+    "required": [
+      {"canonical": "external_value_call", "raw": "value_call"},
+      {"canonical": "post_call_state_write", "raw": "balance_decrement_after_call"}
+    ],
+    "forbidden": [
+      {"canonical": "pre_call_state_write", "raw": "balance_decrement_before_call"},
+      {"canonical": "reentrancy_guard", "raw": "non_reentrant_guard"}
+    ],
+    "source_observation": "The external value call precedes the balance decrement."
+  },
+  {
+    "id": "short-address-token-transfer",
+    "category": "short-address",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/short_addresses/short_address_example.sol",
+    "source_path": "dataset/short_addresses/short_address_example.sol",
+    "annotated_lines": "18",
+    "anchor": "sendCoin",
+    "required": [
+      {"canonical": "address_amount_entry", "raw": "address_then_amount_parameters"}
+    ],
+    "forbidden": [
+      {"canonical": "calldata_length_guard", "raw": "payload_length_check"}
+    ],
+    "source_observation": "The address-and-amount entry point has no payload-length guard."
+  },
+  {
+    "id": "time-manipulation-crowdsale",
+    "category": "time-manipulation",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/time_manipulation/timed_crowdsale.sol",
+    "source_path": "dataset/time_manipulation/timed_crowdsale.sol",
+    "annotated_lines": "13",
+    "anchor": "isSaleFinished",
+    "required": [
+      {"canonical": "miner_influenced_time", "raw": "block_timestamp_condition"}
+    ],
+    "forbidden": [
+      {"canonical": "trusted_time", "raw": "trusted_time_source"}
+    ],
+    "source_observation": "The sale condition depends directly on block.timestamp."
+  },
+  {
+    "id": "unchecked-call-whale-donation",
+    "category": "unchecked-low-level-call",
+    "source_url": "https://github.com/smartbugs/smartbugs-curated/blob/main/dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol",
+    "source_path": "dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol",
+    "annotated_lines": "201,213",
+    "anchor": "donateToWhale",
+    "required": [
+      {"canonical": "low_level_call", "raw": "call_value_invocation"}
+    ],
+    "forbidden": [
+      {"canonical": "return_check", "raw": "call_result_checked"}
+    ],
+    "source_observation": "The low-level value call's Boolean return is not checked."
+  }
+]

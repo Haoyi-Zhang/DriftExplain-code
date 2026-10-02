@@ -1,0 +1,17 @@
+{
+  "all_subset_comparisons": 4055,
+  "directed_pairs": 64,
+  "enumerated_minimum_cases": 365,
+  "enumerated_minimum_disagreements": 0,
+  "independent_candidate_evaluations": 80292,
+  "large_cases": 12,
+  "maximum_large_delta": 64,
+  "maximum_small_delta": 7,
+  "principal_filter_disagreements": 0,
+  "producer_candidate_evaluations": 17648,
+  "structural_deletion_disagreements": 0,
+  "tiny_candidates": 8748,
+  "tiny_complete_subset_cases": 301,
+  "total_candidate_evaluations": 97940,
+  "value_only_negative_control_exposes_nonunique_support": true
+}

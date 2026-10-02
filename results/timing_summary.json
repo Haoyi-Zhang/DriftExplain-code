@@ -1,0 +1,19 @@
+{
+  "alternating_first_strategy": true,
+  "candidate_space_construction_included": true,
+  "cases": 109,
+  "cyclic_gc_disabled_during_timed_pairs": true,
+  "first_strategy_counts": {
+    "full": 381,
+    "incremental": 382
+  },
+  "instrumentation_counters_excluded": true,
+  "measurements_per_case_per_strategy": 7,
+  "median_runtime_ratio": 1.0714793293622487,
+  "new_version_validation_included": true,
+  "observed_pairs": 763,
+  "old_cache_construction_excluded": true,
+  "runtime_ratio_q1": 0.8800656002276442,
+  "runtime_ratio_q3": 1.1703137450635284,
+  "warmup_pairs_per_case": 1
+}

@@ -1,0 +1,111 @@
+{
+  "candidate": {
+    "anchor": "increaseLockTime",
+    "family": "arithmetic"
+  },
+  "change_bound": 12,
+  "classification": "preserved",
+  "delta": [
+    "program|increaseLockTime|irrelevant_metadata"
+  ],
+  "new": {
+    "anchor": "increaseLockTime",
+    "family": "arithmetic",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "arithmetic",
+        "forbidden": [
+          {
+            "aliases": [
+              "checked_arithmetic"
+            ],
+            "canonical": "range_guard",
+            "observations": [
+              {
+                "alias": "checked_arithmetic",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "unchecked_locktime_addition"
+            ],
+            "canonical": "arithmetic_update",
+            "observations": [
+              {
+                "alias": "unchecked_locktime_addition",
+                "origin": "dataset/arithmetic/timelock.sol:22",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-arithmetic",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "increaseLockTime",
+    "family": "arithmetic",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "arithmetic",
+        "forbidden": [
+          {
+            "aliases": [
+              "checked_arithmetic"
+            ],
+            "canonical": "range_guard",
+            "observations": [
+              {
+                "alias": "checked_arithmetic",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "unchecked_locktime_addition"
+            ],
+            "canonical": "arithmetic_update",
+            "observations": [
+              {
+                "alias": "unchecked_locktime_addition",
+                "origin": "dataset/arithmetic/timelock.sol:22",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-arithmetic",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": []
+}

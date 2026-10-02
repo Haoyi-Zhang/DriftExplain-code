@@ -1,0 +1,80 @@
+{
+  "budget_reset": false,
+  "counting_unit": "one family-anchor evaluation, regardless of instrumentation",
+  "current_post_disposition_verification": {
+    "abstract_model_check": {
+      "atom_partitions": 37048,
+      "counterexamples": 0,
+      "endpoint_pairs": 6536,
+      "status": "PASS",
+      "subset_replays": 192176
+    },
+    "campaign_effect": "none; the empirical campaign remains terminated over cap",
+    "classification": "artifact verification after an already-breached campaign cap; includes fresh-output regeneration and verifier mutation tests",
+    "generated_differential_check": {
+      "bijective_renaming_checks": 240,
+      "candidate_pairs": 240,
+      "certificate_checks": 240,
+      "container_order_checks": 240,
+      "disagreements": 0,
+      "generated_endpoint_pairs": 60,
+      "status": "PASS",
+      "subset_replays": 1176
+    },
+    "monotone_core_check": {
+      "counterexamples": 0,
+      "predicates": 65814,
+      "status": "PASS",
+      "theorem_checks": 970,
+      "upward_full_accepting_predicates": 194
+    },
+    "unit_tests": {
+      "methods": 46,
+      "peak_rss_kib": 98860,
+      "record": "results/unit_tests.txt",
+      "status": "PASS",
+      "system_cpu_seconds": 0.57,
+      "user_cpu_seconds": 10.55,
+      "wall_seconds": 7.98
+    }
+  },
+  "declared_campaign_obligation_cap": 800000,
+  "derivation": "(89472 + 23374) * (7 measured paired passes + 1 warm-up paired pass)",
+  "excluded_from_lower_bound": [
+    "old-cache construction",
+    "untimed comparisons",
+    "tiny replay and exhaustive support comparisons",
+    "certificate enumeration and mutation",
+    "other earlier runs",
+    "support study",
+    "unit and post-disposition verification"
+  ],
+  "excluded_positive_claim_types": [
+    "resource-closed empirical campaign",
+    "timing or scaling advantage",
+    "source-level or historical effectiveness",
+    "production performance"
+  ],
+  "full_evaluations_per_pass": 89472,
+  "incremental_evaluations_per_pass": 23374,
+  "measured_pairs_per_case": 7,
+  "paired_evaluations_per_pass": 112846,
+  "positive_performance_claims_allowed": false,
+  "prior_total_cpu_seconds": "unknown; not assumed to be zero",
+  "status": "EMPIRICAL_CAMPAIGN_TERMINATED_OVER_CAP",
+  "support_study": {
+    "candidate_evaluations": 97940,
+    "peak_rss_kib": 99128,
+    "system_cpu_seconds": 0.03,
+    "user_cpu_seconds": 3.07,
+    "wall_seconds": 3.11
+  },
+  "surviving_claim_types": [
+    "self-contained finite mathematical theorems",
+    "conditional source-lifting theorem",
+    "bounded finite implementation correspondence",
+    "negative resource-accounting result"
+  ],
+  "timing_candidate_evaluations_lower_bound": 902768,
+  "warmup_pairs_per_case": 1
+}

@@ -1,0 +1,111 @@
+{
+  "candidate": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation"
+  },
+  "change_bound": 12,
+  "classification": "preserved",
+  "delta": [
+    "program|isSaleFinished|irrelevant_metadata"
+  ],
+  "new": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "block_timestamp_condition"
+            ],
+            "canonical": "miner_influenced_time",
+            "observations": [
+              {
+                "alias": "block_timestamp_condition",
+                "origin": "dataset/time_manipulation/timed_crowdsale.sol:13",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "block_timestamp_condition"
+            ],
+            "canonical": "miner_influenced_time",
+            "observations": [
+              {
+                "alias": "block_timestamp_condition",
+                "origin": "dataset/time_manipulation/timed_crowdsale.sol:13",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": []
+}

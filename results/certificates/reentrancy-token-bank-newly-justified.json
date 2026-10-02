@@ -1,0 +1,189 @@
+{
+  "candidate": {
+    "anchor": "WithdrawToHolder",
+    "family": "reentrancy"
+  },
+  "change_bound": 12,
+  "classification": "newly_justified",
+  "delta": [
+    "program|WithdrawToHolder|balance_decrement_before_call",
+    "program|WithdrawToHolder|non_reentrant_guard"
+  ],
+  "new": {
+    "anchor": "WithdrawToHolder",
+    "family": "reentrancy",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "reentrancy",
+        "forbidden": [
+          {
+            "aliases": [
+              "balance_decrement_before_call"
+            ],
+            "canonical": "pre_call_state_write",
+            "observations": [
+              {
+                "alias": "balance_decrement_before_call",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          },
+          {
+            "aliases": [
+              "non_reentrant_guard"
+            ],
+            "canonical": "reentrancy_guard",
+            "observations": [
+              {
+                "alias": "non_reentrant_guard",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "value_call"
+            ],
+            "canonical": "external_value_call",
+            "observations": [
+              {
+                "alias": "value_call",
+                "origin": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:94",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          },
+          {
+            "aliases": [
+              "balance_decrement_after_call"
+            ],
+            "canonical": "post_call_state_write",
+            "observations": [
+              {
+                "alias": "balance_decrement_after_call",
+                "origin": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:94",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-reentrancy",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "WithdrawToHolder",
+    "family": "reentrancy",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "balance_decrement_before_call"
+          ],
+          "canonical": "pre_call_state_write",
+          "observations": [
+            {
+              "alias": "balance_decrement_before_call",
+              "origin": "authored finite repair point",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "reentrancy",
+        "forbidden": [
+          {
+            "aliases": [
+              "balance_decrement_before_call"
+            ],
+            "canonical": "pre_call_state_write",
+            "observations": [
+              {
+                "alias": "balance_decrement_before_call",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          },
+          {
+            "aliases": [
+              "non_reentrant_guard"
+            ],
+            "canonical": "reentrancy_guard",
+            "observations": [
+              {
+                "alias": "non_reentrant_guard",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "value_call"
+            ],
+            "canonical": "external_value_call",
+            "observations": [
+              {
+                "alias": "value_call",
+                "origin": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:94",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          },
+          {
+            "aliases": [
+              "balance_decrement_after_call"
+            ],
+            "canonical": "post_call_state_write",
+            "observations": [
+              {
+                "alias": "balance_decrement_after_call",
+                "origin": "dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol:94",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-reentrancy",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|WithdrawToHolder|balance_decrement_before_call",
+    "program|WithdrawToHolder|non_reentrant_guard"
+  ]
+}

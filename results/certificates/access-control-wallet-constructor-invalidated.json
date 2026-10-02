@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "initWallet",
+    "family": "access-control"
+  },
+  "change_bound": 12,
+  "classification": "invalidated",
+  "delta": [
+    "program|initWallet|owner_authorization"
+  ],
+  "new": {
+    "anchor": "initWallet",
+    "family": "access-control",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "owner_authorization"
+          ],
+          "canonical": "authorization_guard",
+          "observations": [
+            {
+              "alias": "owner_authorization",
+              "origin": "authored finite guard insertion",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "access-control",
+        "forbidden": [
+          {
+            "aliases": [
+              "owner_authorization"
+            ],
+            "canonical": "authorization_guard",
+            "observations": [
+              {
+                "alias": "owner_authorization",
+                "origin": "authored finite guard insertion",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "public_owner_setter"
+            ],
+            "canonical": "privileged_write",
+            "observations": [
+              {
+                "alias": "public_owner_setter",
+                "origin": "dataset/access_control/wallet_03_wrong_constructor.sol:19-20",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-access-control",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "old": {
+    "anchor": "initWallet",
+    "family": "access-control",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "access-control",
+        "forbidden": [
+          {
+            "aliases": [
+              "owner_authorization"
+            ],
+            "canonical": "authorization_guard",
+            "observations": [
+              {
+                "alias": "owner_authorization",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "public_owner_setter"
+            ],
+            "canonical": "privileged_write",
+            "observations": [
+              {
+                "alias": "public_owner_setter",
+                "origin": "dataset/access_control/wallet_03_wrong_constructor.sol:19-20",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-access-control",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|initWallet|owner_authorization"
+  ]
+}

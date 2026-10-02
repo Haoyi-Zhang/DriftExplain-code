@@ -1,0 +1,115 @@
+{
+  "exhaustive": {
+    "certificate_diagnostics": {
+      "accepted": 301
+    },
+    "classification_agreement_rate": 1.0,
+    "classification_agreements": 8748,
+    "classification_counts": {
+      "absent": 3150,
+      "invalidated": 468,
+      "newly_justified": 387,
+      "preserved": 45,
+      "unresolved": 4698
+    },
+    "classification_replays": 8748,
+    "enumerated_model_pairs": 4374,
+    "maximum_delta_elements": 5,
+    "maximum_witness_elements": 3,
+    "minimality_acceptance_rate": 1.0,
+    "minimality_certificates_accepted": 301,
+    "minimality_certificates_checked": 301,
+    "minimality_sample_by_class": {
+      "absent": 64,
+      "invalidated": 64,
+      "newly_justified": 64,
+      "preserved": 45,
+      "unresolved": 64
+    },
+    "replay_diagnostics": {
+      "agreement": 8748
+    }
+  },
+  "fault_injection": {
+    "diagnostics": {
+      "candidate_space": 58,
+      "certificate_shape": 58,
+      "classification": 58,
+      "delta": 58,
+      "new_evidence": 58,
+      "old_evidence": 116,
+      "schema": 58,
+      "witness_bound": 58,
+      "witness_member": 30,
+      "witness_order": 86
+    },
+    "mutations": 638,
+    "rejected": 638,
+    "rejection_rate": 1.0
+  },
+  "generated_scaling": {
+    "cases": 109,
+    "family_obligation_reduction": 0.7387562589413448,
+    "full_family_obligations": 89472,
+    "full_rule_obligations": 542976,
+    "incremental_family_obligations": 23374,
+    "incremental_rule_obligations": 145308,
+    "mean_nonpreserved_witness_reduction": 0.6580645161290322,
+    "mean_sampled_delta_elements": 3.1186440677966103,
+    "mean_sampled_witness_elements": 1.1016949152542372,
+    "mean_sampled_witness_reduction": 0.6467391304347827,
+    "median_affected_fraction": 0.25048828125,
+    "rule_obligation_reduction": 0.7323859618104668,
+    "sampled_certificates_checked": 59,
+    "sampled_classification_counts": {
+      "invalidated": 5,
+      "newly_justified": 14,
+      "preserved": 11,
+      "unresolved": 29
+    },
+    "semantic_disagreements": 0,
+    "textual_baseline_accuracy": 0.25505244308007163,
+    "textual_baseline_cases": 11727,
+    "witness_metrics_by_class": {
+      "invalidated": {
+        "cases": 5,
+        "mean_delta_elements": 2.8,
+        "mean_reduction": 0.6428571428571428,
+        "mean_witness_elements": 1.0
+      },
+      "newly_justified": {
+        "cases": 14,
+        "mean_delta_elements": 2.9285714285714284,
+        "mean_reduction": 0.6341463414634146,
+        "mean_witness_elements": 1.0714285714285714
+      },
+      "preserved": {
+        "cases": 11,
+        "mean_delta_elements": 2.6363636363636362,
+        "mean_reduction": 0.5862068965517242,
+        "mean_witness_elements": 1.0909090909090908
+      },
+      "unresolved": {
+        "cases": 29,
+        "mean_delta_elements": 3.4482758620689653,
+        "mean_reduction": 0.6699999999999999,
+        "mean_witness_elements": 1.1379310344827587
+      }
+    }
+  },
+  "public_patterns": {
+    "checker_acceptance_rate": 1.0,
+    "classification_counts": {
+      "invalidated": 9,
+      "newly_justified": 9,
+      "preserved": 9,
+      "unresolved": 9
+    },
+    "evolutions": 36,
+    "fixtures": 9,
+    "mean_delta_elements": 1.0277777777777777,
+    "mean_witness_elements": 0.7777777777777778,
+    "mean_witness_reduction": 0.2432432432432432,
+    "textual_baseline_accuracy": 0.0
+  }
+}

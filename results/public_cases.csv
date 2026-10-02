@@ -1,0 +1,37 @@
+case,fixture,category,mutation,classification,checker,delta_elements,witness_elements,textual_baseline,baseline_correct,source_path,annotated_lines
+access-control-wallet-constructor-preserved,access-control-wallet-constructor,access-control,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/access_control/wallet_03_wrong_constructor.sol,19-20
+access-control-wallet-constructor-invalidated,access-control-wallet-constructor,access-control,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/access_control/wallet_03_wrong_constructor.sol,19-20
+access-control-wallet-constructor-newly-justified,access-control-wallet-constructor,access-control,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/access_control/wallet_03_wrong_constructor.sol,19-20
+access-control-wallet-constructor-unresolved,access-control-wallet-constructor,access-control,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/access_control/wallet_03_wrong_constructor.sol,19-20
+arithmetic-timelock-preserved,arithmetic-timelock,arithmetic,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/arithmetic/timelock.sol,22
+arithmetic-timelock-invalidated,arithmetic-timelock,arithmetic,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/arithmetic/timelock.sol,22
+arithmetic-timelock-newly-justified,arithmetic-timelock,arithmetic,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/arithmetic/timelock.sol,22
+arithmetic-timelock-unresolved,arithmetic-timelock,arithmetic,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/arithmetic/timelock.sol,22
+bad-randomness-lottery-preserved,bad-randomness-lottery,bad-randomness,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/bad_randomness/lottery.sol,"38,42"
+bad-randomness-lottery-invalidated,bad-randomness-lottery,bad-randomness,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/bad_randomness/lottery.sol,"38,42"
+bad-randomness-lottery-newly-justified,bad-randomness-lottery,bad-randomness,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/bad_randomness/lottery.sol,"38,42"
+bad-randomness-lottery-unresolved,bad-randomness-lottery,bad-randomness,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/bad_randomness/lottery.sol,"38,42"
+denial-of-service-array-fill-preserved,denial-of-service-array-fill,denial-of-service,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/denial_of_service/dos_simple.sol,17-18
+denial-of-service-array-fill-invalidated,denial-of-service-array-fill,denial-of-service,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/denial_of_service/dos_simple.sol,17-18
+denial-of-service-array-fill-newly-justified,denial-of-service-array-fill,denial-of-service,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/denial_of_service/dos_simple.sol,17-18
+denial-of-service-array-fill-unresolved,denial-of-service-array-fill,denial-of-service,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/denial_of_service/dos_simple.sol,17-18
+front-running-reward-claim-preserved,front-running-reward-claim,front-running,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/front_running/eth_tx_order_dependence_minimal.sol,"23,31"
+front-running-reward-claim-invalidated,front-running-reward-claim,front-running,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/front_running/eth_tx_order_dependence_minimal.sol,"23,31"
+front-running-reward-claim-newly-justified,front-running-reward-claim,front-running,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/front_running/eth_tx_order_dependence_minimal.sol,"23,31"
+front-running-reward-claim-unresolved,front-running-reward-claim,front-running,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/front_running/eth_tx_order_dependence_minimal.sol,"23,31"
+reentrancy-token-bank-preserved,reentrancy-token-bank,reentrancy,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol,94
+reentrancy-token-bank-invalidated,reentrancy-token-bank,reentrancy,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol,94
+reentrancy-token-bank-newly-justified,reentrancy-token-bank,reentrancy,guard removed,newly_justified,accepted,2,2,invalidated,0,dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol,94
+reentrancy-token-bank-unresolved,reentrancy-token-bank,reentrancy,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/reentrancy/0x627fa62ccbb1c1b04ffaecd72a53e37fc0e17839.sol,94
+short-address-token-transfer-preserved,short-address-token-transfer,short-address,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/short_addresses/short_address_example.sol,18
+short-address-token-transfer-invalidated,short-address-token-transfer,short-address,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/short_addresses/short_address_example.sol,18
+short-address-token-transfer-newly-justified,short-address-token-transfer,short-address,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/short_addresses/short_address_example.sol,18
+short-address-token-transfer-unresolved,short-address-token-transfer,short-address,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/short_addresses/short_address_example.sol,18
+time-manipulation-crowdsale-preserved,time-manipulation-crowdsale,time-manipulation,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/time_manipulation/timed_crowdsale.sol,13
+time-manipulation-crowdsale-invalidated,time-manipulation-crowdsale,time-manipulation,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/time_manipulation/timed_crowdsale.sol,13
+time-manipulation-crowdsale-newly-justified,time-manipulation-crowdsale,time-manipulation,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/time_manipulation/timed_crowdsale.sol,13
+time-manipulation-crowdsale-unresolved,time-manipulation-crowdsale,time-manipulation,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/time_manipulation/timed_crowdsale.sol,13
+unchecked-call-whale-donation-preserved,unchecked-call-whale-donation,unchecked-low-level-call,unrelated observation added,preserved,accepted,1,0,newly_justified,0,dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol,"201,213"
+unchecked-call-whale-donation-invalidated,unchecked-call-whale-donation,unchecked-low-level-call,guard inserted,invalidated,accepted,1,1,newly_justified,0,dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol,"201,213"
+unchecked-call-whale-donation-newly-justified,unchecked-call-whale-donation,unchecked-low-level-call,guard removed,newly_justified,accepted,1,1,invalidated,0,dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol,"201,213"
+unchecked-call-whale-donation-unresolved,unchecked-call-whale-donation,unchecked-low-level-call,required normalization entry removed,unresolved,accepted,1,1,preserved,0,dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol,"201,213"

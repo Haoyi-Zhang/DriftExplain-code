@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "sendCoin",
+    "family": "short-address"
+  },
+  "change_bound": 12,
+  "classification": "newly_justified",
+  "delta": [
+    "program|sendCoin|payload_length_check"
+  ],
+  "new": {
+    "anchor": "sendCoin",
+    "family": "short-address",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "short-address",
+        "forbidden": [
+          {
+            "aliases": [
+              "payload_length_check"
+            ],
+            "canonical": "calldata_length_guard",
+            "observations": [
+              {
+                "alias": "payload_length_check",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "address_then_amount_parameters"
+            ],
+            "canonical": "address_amount_entry",
+            "observations": [
+              {
+                "alias": "address_then_amount_parameters",
+                "origin": "dataset/short_addresses/short_address_example.sol:18",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-short-address",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "sendCoin",
+    "family": "short-address",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "payload_length_check"
+          ],
+          "canonical": "calldata_length_guard",
+          "observations": [
+            {
+              "alias": "payload_length_check",
+              "origin": "authored finite repair point",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "short-address",
+        "forbidden": [
+          {
+            "aliases": [
+              "payload_length_check"
+            ],
+            "canonical": "calldata_length_guard",
+            "observations": [
+              {
+                "alias": "payload_length_check",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "address_then_amount_parameters"
+            ],
+            "canonical": "address_amount_entry",
+            "observations": [
+              {
+                "alias": "address_then_amount_parameters",
+                "origin": "dataset/short_addresses/short_address_example.sol:18",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-short-address",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|sendCoin|payload_length_check"
+  ]
+}

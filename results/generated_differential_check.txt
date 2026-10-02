@@ -1,0 +1,27 @@
+{
+  "configuration": {
+    "cases_per_seed": 12,
+    "exhaustive_candidate_limit": 48,
+    "maximum_changes": 6,
+    "seeds": [
+      3,
+      11,
+      29,
+      47,
+      71
+    ]
+  },
+  "disagreements": [],
+  "scope": "seeded finite differential and metamorphic checks; no fitted model, source parser, performance claim, or statistical generalization",
+  "status": "PASS",
+  "totals": {
+    "bijective_renaming_checks": 240,
+    "candidate_pairs": 240,
+    "certificate_checks": 240,
+    "container_order_checks": 240,
+    "disagreements": 0,
+    "exhaustive_candidates": 48,
+    "generated_endpoint_pairs": 60,
+    "subset_replays": 1176
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "candidate": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation"
+  },
+  "change_bound": 12,
+  "classification": "unresolved",
+  "delta": [
+    "normalizer|miner_influenced_time"
+  ],
+  "new": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "unresolved_rule",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [],
+          "canonical": "miner_influenced_time",
+          "observations": [],
+          "reason": "missing_normalizer",
+          "value": "U"
+        },
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "unknown_literal",
+        "required": [
+          {
+            "aliases": [],
+            "canonical": "miner_influenced_time",
+            "observations": [],
+            "reason": "missing_normalizer",
+            "value": "U"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "U"
+      }
+    ],
+    "value": "U"
+  },
+  "old": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "block_timestamp_condition"
+            ],
+            "canonical": "miner_influenced_time",
+            "observations": [
+              {
+                "alias": "block_timestamp_condition",
+                "origin": "dataset/time_manipulation/timed_crowdsale.sol:13",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "normalizer|miner_influenced_time"
+  ]
+}

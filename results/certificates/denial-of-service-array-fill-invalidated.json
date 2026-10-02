@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "ifillArray",
+    "family": "denial-of-service"
+  },
+  "change_bound": 12,
+  "classification": "invalidated",
+  "delta": [
+    "program|ifillArray|bounded_work_per_call"
+  ],
+  "new": {
+    "anchor": "ifillArray",
+    "family": "denial-of-service",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "bounded_work_per_call"
+          ],
+          "canonical": "amortized_iteration",
+          "observations": [
+            {
+              "alias": "bounded_work_per_call",
+              "origin": "authored finite guard insertion",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "denial-of-service",
+        "forbidden": [
+          {
+            "aliases": [
+              "bounded_work_per_call"
+            ],
+            "canonical": "amortized_iteration",
+            "observations": [
+              {
+                "alias": "bounded_work_per_call",
+                "origin": "authored finite guard insertion",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "bulk_storage_loop"
+            ],
+            "canonical": "gas_sensitive_iteration",
+            "observations": [
+              {
+                "alias": "bulk_storage_loop",
+                "origin": "dataset/denial_of_service/dos_simple.sol:17-18",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-denial-of-service",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "old": {
+    "anchor": "ifillArray",
+    "family": "denial-of-service",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "denial-of-service",
+        "forbidden": [
+          {
+            "aliases": [
+              "bounded_work_per_call"
+            ],
+            "canonical": "amortized_iteration",
+            "observations": [
+              {
+                "alias": "bounded_work_per_call",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "bulk_storage_loop"
+            ],
+            "canonical": "gas_sensitive_iteration",
+            "observations": [
+              {
+                "alias": "bulk_storage_loop",
+                "origin": "dataset/denial_of_service/dos_simple.sol:17-18",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-denial-of-service",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|ifillArray|bounded_work_per_call"
+  ]
+}

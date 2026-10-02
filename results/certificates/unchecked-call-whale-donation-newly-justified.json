@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "donateToWhale",
+    "family": "unchecked-low-level-call"
+  },
+  "change_bound": 12,
+  "classification": "newly_justified",
+  "delta": [
+    "program|donateToWhale|call_result_checked"
+  ],
+  "new": {
+    "anchor": "donateToWhale",
+    "family": "unchecked-low-level-call",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "unchecked-low-level-call",
+        "forbidden": [
+          {
+            "aliases": [
+              "call_result_checked"
+            ],
+            "canonical": "return_check",
+            "observations": [
+              {
+                "alias": "call_result_checked",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "call_value_invocation"
+            ],
+            "canonical": "low_level_call",
+            "observations": [
+              {
+                "alias": "call_value_invocation",
+                "origin": "dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol:201,213",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-unchecked-low-level-call",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "donateToWhale",
+    "family": "unchecked-low-level-call",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "call_result_checked"
+          ],
+          "canonical": "return_check",
+          "observations": [
+            {
+              "alias": "call_result_checked",
+              "origin": "authored finite repair point",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "unchecked-low-level-call",
+        "forbidden": [
+          {
+            "aliases": [
+              "call_result_checked"
+            ],
+            "canonical": "return_check",
+            "observations": [
+              {
+                "alias": "call_result_checked",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "call_value_invocation"
+            ],
+            "canonical": "low_level_call",
+            "observations": [
+              {
+                "alias": "call_value_invocation",
+                "origin": "dataset/unchecked_low_level_calls/0x07f7ecb66d788ab01dc93b9b71a88401de7d0f2e.sol:201,213",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-unchecked-low-level-call",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|donateToWhale|call_result_checked"
+  ]
+}

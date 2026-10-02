@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "makeBet",
+    "family": "bad-randomness"
+  },
+  "change_bound": 12,
+  "classification": "invalidated",
+  "delta": [
+    "program|makeBet|external_randomness"
+  ],
+  "new": {
+    "anchor": "makeBet",
+    "family": "bad-randomness",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "external_randomness"
+          ],
+          "canonical": "trusted_entropy",
+          "observations": [
+            {
+              "alias": "external_randomness",
+              "origin": "authored finite guard insertion",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "bad-randomness",
+        "forbidden": [
+          {
+            "aliases": [
+              "external_randomness"
+            ],
+            "canonical": "trusted_entropy",
+            "observations": [
+              {
+                "alias": "external_randomness",
+                "origin": "authored finite guard insertion",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "block_number_randomness"
+            ],
+            "canonical": "miner_influenced_entropy",
+            "observations": [
+              {
+                "alias": "block_number_randomness",
+                "origin": "dataset/bad_randomness/lottery.sol:38,42",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-bad-randomness",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "old": {
+    "anchor": "makeBet",
+    "family": "bad-randomness",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "bad-randomness",
+        "forbidden": [
+          {
+            "aliases": [
+              "external_randomness"
+            ],
+            "canonical": "trusted_entropy",
+            "observations": [
+              {
+                "alias": "external_randomness",
+                "origin": "authored finite repair point",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "block_number_randomness"
+            ],
+            "canonical": "miner_influenced_entropy",
+            "observations": [
+              {
+                "alias": "block_number_randomness",
+                "origin": "dataset/bad_randomness/lottery.sol:38,42",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-bad-randomness",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|makeBet|external_randomness"
+  ]
+}

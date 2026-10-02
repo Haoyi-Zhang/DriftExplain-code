@@ -1,0 +1,13 @@
+{
+  "all_subset_comparisons": 148,
+  "directed_pairs": 24,
+  "enumerated_minimum_disagreements": 0,
+  "independent_candidate_evaluations": 494,
+  "large_cases": 0,
+  "maximum_large_delta": 0,
+  "maximum_small_delta": 4,
+  "principal_filter_disagreements": 0,
+  "structural_deletion_disagreements": 0,
+  "tiny_candidates": 0,
+  "value_only_negative_control_exposes_nonunique_support": true
+}

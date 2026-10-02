@@ -1,0 +1,75 @@
+{
+  "exact_sufficient_subsets": [
+    [
+      "program|a|x",
+      "program|a|y"
+    ]
+  ],
+  "kind": "owned finite negative control",
+  "new": {
+    "normalizer": {
+      "p": [
+        "x",
+        "y"
+      ]
+    },
+    "rules": [
+      {
+        "family": "f",
+        "id": "r",
+        "requires": [
+          "p"
+        ]
+      }
+    ],
+    "targets": [
+      {
+        "anchor": "a",
+        "raw": {
+          "x": "T",
+          "y": "T"
+        }
+      }
+    ]
+  },
+  "old": {
+    "normalizer": {
+      "p": [
+        "x",
+        "y"
+      ]
+    },
+    "rules": [
+      {
+        "family": "f",
+        "id": "r",
+        "requires": [
+          "p"
+        ]
+      }
+    ],
+    "targets": [
+      {
+        "anchor": "a",
+        "raw": {
+          "x": "F",
+          "y": "F"
+        }
+      }
+    ]
+  },
+  "source_security_meaning": "none",
+  "value_mandatory_intersection_is_insufficient": true,
+  "value_sufficient_subsets": [
+    [
+      "program|a|x"
+    ],
+    [
+      "program|a|y"
+    ],
+    [
+      "program|a|x",
+      "program|a|y"
+    ]
+  ]
+}

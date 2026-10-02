@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying article when using this finite-analysis artifact."
+title: "Finite Evidence Support for Evolving Rule Analyzers"
+type: software
+authors:
+  - family-names: Ran
+    given-names: Huaijin
+  - family-names: Zhang
+    given-names: Haoyi
+license: MIT

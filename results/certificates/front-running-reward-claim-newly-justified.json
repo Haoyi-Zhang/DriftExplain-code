@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "claimReward",
+    "family": "front-running"
+  },
+  "change_bound": 12,
+  "classification": "newly_justified",
+  "delta": [
+    "program|claimReward|commit_reveal_protocol"
+  ],
+  "new": {
+    "anchor": "claimReward",
+    "family": "front-running",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "front-running",
+        "forbidden": [
+          {
+            "aliases": [
+              "commit_reveal_protocol"
+            ],
+            "canonical": "commitment_guard",
+            "observations": [
+              {
+                "alias": "commit_reveal_protocol",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "public_solution_submission"
+            ],
+            "canonical": "public_value_race",
+            "observations": [
+              {
+                "alias": "public_solution_submission",
+                "origin": "dataset/front_running/eth_tx_order_dependence_minimal.sol:23,31",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-front-running",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "claimReward",
+    "family": "front-running",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "commit_reveal_protocol"
+          ],
+          "canonical": "commitment_guard",
+          "observations": [
+            {
+              "alias": "commit_reveal_protocol",
+              "origin": "authored finite repair point",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "front-running",
+        "forbidden": [
+          {
+            "aliases": [
+              "commit_reveal_protocol"
+            ],
+            "canonical": "commitment_guard",
+            "observations": [
+              {
+                "alias": "commit_reveal_protocol",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "public_solution_submission"
+            ],
+            "canonical": "public_value_race",
+            "observations": [
+              {
+                "alias": "public_solution_submission",
+                "origin": "dataset/front_running/eth_tx_order_dependence_minimal.sol:23,31",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-front-running",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|claimReward|commit_reveal_protocol"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "candidate": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation"
+  },
+  "change_bound": 12,
+  "classification": "newly_justified",
+  "delta": [
+    "program|isSaleFinished|trusted_time_source"
+  ],
+  "new": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "supporting_rule",
+    "rules": [
+      {
+        "decisive": null,
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite guard removal",
+                "value": "F"
+              }
+            ],
+            "reason": "all_aliases_false",
+            "value": "F"
+          }
+        ],
+        "reason": "all_literals_satisfied",
+        "required": [
+          {
+            "aliases": [
+              "block_timestamp_condition"
+            ],
+            "canonical": "miner_influenced_time",
+            "observations": [
+              {
+                "alias": "block_timestamp_condition",
+                "origin": "dataset/time_manipulation/timed_crowdsale.sol:13",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "T"
+      }
+    ],
+    "value": "T"
+  },
+  "old": {
+    "anchor": "isSaleFinished",
+    "family": "time-manipulation",
+    "reason": "all_rules_refuted",
+    "rules": [
+      {
+        "decisive": {
+          "aliases": [
+            "trusted_time_source"
+          ],
+          "canonical": "trusted_time",
+          "observations": [
+            {
+              "alias": "trusted_time_source",
+              "origin": "authored finite repair point",
+              "value": "T"
+            }
+          ],
+          "reason": "true_alias",
+          "value": "T"
+        },
+        "family": "time-manipulation",
+        "forbidden": [
+          {
+            "aliases": [
+              "trusted_time_source"
+            ],
+            "canonical": "trusted_time",
+            "observations": [
+              {
+                "alias": "trusted_time_source",
+                "origin": "authored finite repair point",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "reason": "forbidden_true",
+        "required": [
+          {
+            "aliases": [
+              "block_timestamp_condition"
+            ],
+            "canonical": "miner_influenced_time",
+            "observations": [
+              {
+                "alias": "block_timestamp_condition",
+                "origin": "dataset/time_manipulation/timed_crowdsale.sol:13",
+                "value": "T"
+              }
+            ],
+            "reason": "true_alias",
+            "value": "T"
+          }
+        ],
+        "rule": "rule-time-manipulation",
+        "value": "F"
+      }
+    ],
+    "value": "F"
+  },
+  "schema": "finite-finding-drift-certificate",
+  "witness": [
+    "program|isSaleFinished|trusted_time_source"
+  ]
+}
