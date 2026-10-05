@@ -336,12 +336,16 @@ certificate is therefore an admission premise.
 
 ## 12. Certificate acceptance
 
-For valid finite endpoints and a candidate in the union family-anchor space, the
-checker independently reconstructs old/new evidence, classification, candidate
-frame, canonical complete delta, and deletion core. Under the structural theorem
-premises, it accepts exactly when every required serialized field agrees, the
-witness equals that core, and replaying the core reproduces final evidence. The
-core then equals the unique least support.
+For valid finite endpoints, the checker first admits the certificate's schema
+and candidate in the union family-anchor space, nonboolean integer bounds
+`0 <= |D| <= b <= M`, and sorted, duplicate-free in-delta witness shape, under
+the nonnegative integer checker cap `M`. It independently reconstructs old/new
+evidence, classification, candidate frame, canonical complete delta, and deletion
+core. Conditional on that admission and the structural theorem premises,
+acceptance is equivalent to exact required serialized fields, a witness equal
+to the core, and core replay reproducing final evidence. The core then equals
+the unique least support. Semantic equality alone does not admit a certificate
+whose declared bound exceeds the configured checker cap.
 
 A bound failure is distinct from a failed core-sufficiency replay. Under the
 theorem premises, the latter is an implementation inconsistency. Outside those
