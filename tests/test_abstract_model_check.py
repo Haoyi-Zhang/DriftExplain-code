@@ -51,8 +51,13 @@ class AbstractModelCheckTests(unittest.TestCase):
             hidden = controls[
                 "hidden_visibility_breaks_structural_identification"
             ]
-            self.assertTrue(hidden["empty_patch"]["actual_sufficient"])
-            self.assertFalse(hidden["empty_patch"]["predicted_sufficient"])
+            self.assertEqual(hidden["hidden_final_read"], [2])
+            self.assertEqual(hidden["support"], [])
+            self.assertFalse(hidden["empty_patch"]["actual_sufficient"])
+            self.assertTrue(hidden["empty_patch"]["predicted_sufficient"])
+            self.assertEqual(hidden["empty_patch"]["hidden_old_evidence"], [[1, 7]])
+            self.assertEqual(hidden["empty_patch"]["hidden_new_evidence"], [[2, 9]])
+            self.assertEqual(hidden["restored_complete_evidence"]["support"], [0])
             self.assertTrue(
                 hidden["empty_patch"]["structural_equivalence_violated"]
             )

@@ -323,7 +323,11 @@ frame or an explicit total representation.
 ### Hidden controls and short-circuit traces
 
 If an unrecorded value selects a later branch, an atom outside the reported read
-set can change evidence. If evidence records only one successful or decisive
+set can change evidence. The executed selector control uses states `(0,7,9)`
+and `(1,7,9)` with a singleton selector footprint `{0}`. Its hidden final read
+set is `{2}`, so computed support is empty, yet keyed evidence changes from
+`((1,7),)` to `((2,9),)`. Recording the selector restores final reads `{0,2}`
+and support `{0}`. If evidence records only one successful or decisive
 branch, dominated alternatives can disappear and incomparable minima can arise.
 The theorem supplies no result for either interface.
 

@@ -43,7 +43,7 @@ From this directory:
 PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python verify_artifact.py
 ```
 
-The command copies the artifact to a temporary directory and runs:
+The command copies the artifact to an isolated directory and runs:
 
 1. all 46 unit/regression tests;
 2. the independent stratified-frame enumerator;
@@ -62,6 +62,24 @@ a missing fresh output, a changed frozen field, and a format conflict must all
 produce `FAIL`.  No copied frozen JSON is accepted as evidence of regeneration.
 The original artifact directory is not modified except for the final verification
 report.
+
+Every verification step has a 120-second timeout. The isolated copy, fresh
+results, and raw output are retained on success or failure; the report gives
+their location. Use `--work-dir /path/to/new-directory` outside the artifact and
+`--output /path/to/report.json` to choose where evidence is retained. Strict
+result comparison uses a fixed LF encoding on Windows and Unix alike.
+
+The hidden-selector control computes an empty support from its actual final
+leaf read set while a selector edit changes the keyed leaf evidence. Recording
+the selector restores support `{0}` and the principal-filter correspondence.
+The interacting-delta regression distinguishes replacing a true alias with an
+unknown alias from appending the unknown alias: a retained true alias dominates.
+
+`.github/workflows/scientific-checks.yml` runs these finite gates from the flat
+artifact repository root on Ubuntu 24.04. Its whole run is limited to 300 seconds,
+with CPU, address-space and output-file bounds; raw output and fresh results are
+uploaded even when a gate fails. This workflow is separate from source-syntax
+integrity checks and does not run the terminated historical campaign.
 
 ## Acceptance path and retained harnesses
 

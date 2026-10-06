@@ -4,7 +4,9 @@ import importlib.util
 import json
 import os
 import tempfile
+import subprocess
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -106,6 +108,16 @@ class VerificationChainTests(unittest.TestCase):
             self.assertEqual(comparison["status"], "FAIL")
             self.assertFalse(comparison["generated_exists"])
             self.assertEqual(comparison["generated_parse_error"], "missing file")
+            # A timed-out owned generator must fail, retain partial diagnostics,
+            # and not be interpreted as successful fresh-output regeneration.
+            with mock.patch.object(VERIFY.subprocess, "run", side_effect=
+                                   subprocess.TimeoutExpired(["toy.py"], 1,
+                                                             output=b"partial output")):
+                timed = VERIFY.run(["python", "toy.py"], copy_root,
+                                   self.environment(), timeout_seconds=1)
+            self.assertEqual(timed["exit_status"], 124)
+            self.assertTrue(timed["timed_out"])
+            self.assertIn("partial output", timed["output"])
 
     def test_changed_frozen_field_is_fail(self):
         with tempfile.TemporaryDirectory() as directory:

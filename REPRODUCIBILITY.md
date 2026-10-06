@@ -2,7 +2,7 @@
 
 ## Requirements
 
-A standard Python 3 installation is sufficient.  The acceptance surface uses
+A standard Python 3.10 or newer installation is sufficient. The acceptance surface uses
 only the Python standard library.  No network, package installation, external
 solver, compiler, blockchain service, or model is required.
 
@@ -14,8 +14,13 @@ Run from the artifact root:
 PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python verify_artifact.py
 ```
 
-Expected final status: `PASS`.  The verifier uses a temporary copy, so it does
-not import modules from or write caches into the supplied tree.
+Expected final status: `PASS`. The verifier uses an isolated copy, so it does
+not import modules from or write caches into the supplied tree. Each step has
+a 120-second timeout. The copy, raw output and generated JSON are retained;
+the report records their location. Choose an external new directory with
+`--work-dir` and an external report with `--output` when preserving attempts
+outside the artifact. Deterministic JSON has fixed LF newlines on both Windows
+and Unix; semantic and exact-byte comparisons remain required.
 
 ## Individual commands
 
@@ -59,7 +64,10 @@ passes explicit fresh output paths, checks that those paths were created,
 parses the newly written JSON, rejects forbidden `schema_version` metadata, and
 then requires semantic and byte-for-byte equality with the frozen files.  The
 unit suite mutates this chain so that a missing new file, a changed frozen field,
-or a generated/frozen format conflict is observed as `FAIL`.
+or a generated/frozen format conflict is observed as `FAIL`. It also exercises
+timeout handling with a mocked owned generator and requires partial diagnostics
+and exit status 124 to be retained. Reusing an existing fresh-result path is
+rejected rather than deleting or trusting the old output.
 
 These checks validate implementation correspondence on bounded finite spaces.
 They do not mechanize the proof, authenticate upstream source observations, or

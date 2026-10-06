@@ -221,13 +221,21 @@ def overlapping_write_control() -> dict:
 
 
 def hidden_selector_control() -> dict:
-    old = (0, 7, 7)
-    new = (1, 7, 7)
+    old = (0, 7, 9)
+    new = (1, 7, 9)
     blocks = ((0,),)
-    support = {0}
+    # Complete keyed leaf records, but the selector controlling visibility is
+    # not recorded. Derive support from the actual final hidden read closure:
+    # the selector atom is exterior even though it changes the selected key.
+    hidden_final_read = {1 + new[0]}
+    support = {
+        atom for atom, block in enumerate(blocks)
+        if hidden_final_read.intersection(block)
+    }
 
-    def hidden_evidence(state: tuple[int, ...]) -> tuple[int]:
-        return (state[1 + state[0]],)
+    def hidden_evidence(state: tuple[int, ...]) -> tuple[tuple[int, int], ...]:
+        key = 1 + state[0]
+        return ((key, state[key]),)
 
     empty = set()
     full = {0}
@@ -235,10 +243,15 @@ def hidden_selector_control() -> dict:
     hidden_empty_predicted = support.issubset(empty)
     hidden_violation = hidden_empty_actual != hidden_empty_predicted
 
+    restored_final_read = {0, 1 + new[0]}
+    restored_support = {
+        atom for atom, block in enumerate(blocks)
+        if restored_final_read.intersection(block)
+    }
     restored_agreements = []
     for chosen in powerset(len(blocks)):
         actual = evidence(patch(old, new, blocks, chosen)) == evidence(new)
-        predicted = support.issubset(chosen)
+        predicted = restored_support.issubset(chosen)
         restored_agreements.append(actual == predicted)
 
     return {
@@ -246,15 +259,18 @@ def hidden_selector_control() -> dict:
         "old_state": list(old),
         "new_state": list(new),
         "selector_atom_block": [0],
-        "support": [0],
+        "hidden_final_read": sorted(hidden_final_read),
+        "support": sorted(support),
         "empty_patch": {
-            "hidden_old_evidence": list(hidden_evidence(old)),
-            "hidden_new_evidence": list(hidden_evidence(new)),
+            "hidden_old_evidence": [list(record) for record in hidden_evidence(old)],
+            "hidden_new_evidence": [list(record) for record in hidden_evidence(new)],
             "actual_sufficient": hidden_empty_actual,
             "predicted_sufficient": hidden_empty_predicted,
             "structural_equivalence_violated": hidden_violation,
         },
         "restored_complete_evidence": {
+            "final_read": sorted(restored_final_read),
+            "support": sorted(restored_support),
             "old_evidence": list(evidence(old)),
             "new_evidence": list(evidence(new)),
             "empty_patch_sufficient": evidence(old) == evidence(new),
@@ -391,7 +407,7 @@ def main() -> int:
     }
     text = json.dumps(output, indent=2, sort_keys=True) + "\n"
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(text, encoding="utf-8")
+    args.output.write_text(text, encoding="utf-8", newline="\n")
     print(text, end="")
     return 0 if output["status"] == "PASS" else 1
 

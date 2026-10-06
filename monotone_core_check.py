@@ -275,7 +275,7 @@ def main():
     output = run(args.max_atoms)
     text = json.dumps(output, indent=2, sort_keys=True) + "\n"
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(text, encoding="utf-8")
+    args.output.write_text(text, encoding="utf-8", newline="\n")
     print(text, end="")
     return 0 if output["status"] == "PASS" else 1
 

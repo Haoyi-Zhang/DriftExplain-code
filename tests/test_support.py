@@ -117,6 +117,32 @@ class SupportTests(unittest.TestCase):
         new["targets"][0]["raw"].update(x="T", y="T")
         self.assertEqual(producer.minimum_witness(old, new, "f", "a"),
                          ["normalizer|p", "program|a|y"])
+        # Paper's interacting delta: replacement, not extension, is needed
+        # because a retained true alias dominates an appended unknown alias.
+        old = {"targets": [{"anchor": "a", "raw": {
+            "p_true": "T", "p_unknown": "U", "q_raw": "F", "noise": "F"}}],
+            "normalizer": {"p": ["p_true"], "q": ["q_raw"]},
+            "rules": [{"id": "r", "family": "f", "requires": ["p", "q"]}]}
+        new = copy.deepcopy(old)
+        new["targets"][0]["raw"].update(q_raw="T", noise="T")
+        new["normalizer"]["p"] = ["p_unknown"]
+        changes = producer.compute_delta(old, new)
+        expected = {frozenset(): "F", frozenset({"program|a|q_raw"}): "T",
+                    frozenset({"normalizer|p"}): "F",
+                    frozenset({"normalizer|p", "program|a|q_raw"}): "U",
+                    frozenset(d["id"] for d in changes): "U"}
+        final = producer.evaluate_family(new, "f", "a")
+        for chosen, value in expected.items():
+            hybrid = producer.apply_operations(old, [d for d in changes if d["id"] in chosen])
+            observed = producer.evaluate_family(hybrid, "f", "a")
+            self.assertEqual(observed["value"], value)
+            self.assertEqual(observed == final,
+                             {"normalizer|p", "program|a|q_raw"}.issubset(chosen))
+        cert = producer.make_certificate(old, new, "f", "a")
+        self.assertEqual(cert["witness"], ["normalizer|p", "program|a|q_raw"])
+        self.assertEqual(checker.check_certificate(old, new, cert), (True, "accepted"))
+        new["normalizer"]["p"] = ["p_true", "p_unknown"]
+        self.assertEqual(producer.evaluate_family(new, "f", "a")["value"], "T")
 
     def test_full_patch_is_effectively_not_syntactically_equal(self):
         old, new = model(), model()

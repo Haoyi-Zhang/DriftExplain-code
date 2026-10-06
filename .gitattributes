@@ -1,0 +1,4 @@
+# Frozen deterministic results are compared as exact bytes on every platform.
+results/abstract_model_check.json text eol=lf
+results/monotone_core_check.json text eol=lf
+results/generated_differential_check.json text eol=lf

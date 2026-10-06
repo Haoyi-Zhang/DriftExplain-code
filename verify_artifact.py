@@ -9,6 +9,7 @@ No result is accepted merely because a copied frozen JSON file already exists.
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 import json
 import os
 import re
@@ -16,6 +17,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -27,23 +29,33 @@ def run(
     cwd: Path,
     env: dict[str, str],
     display_command: Iterable[str] | None = None,
+    timeout_seconds: float = 120,
 ) -> dict[str, Any]:
-    completed = subprocess.run(
-        command,
-        cwd=cwd,
-        env=env,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
+    started = time.perf_counter()
+    timed_out = False
+    try:
+        completed = subprocess.run(
+            command, cwd=cwd, env=env, text=True, encoding="utf-8",
+            errors="replace", stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT, check=False, timeout=timeout_seconds,
+        )
+        exit_status, output = completed.returncode, completed.stdout
+    except subprocess.TimeoutExpired as exc:
+        timed_out = True
+        exit_status = 124
+        output = exc.stdout or ""
+        if isinstance(output, bytes):
+            output = output.decode("utf-8", errors="replace")
+        output += f"\nVerification step exceeded {timeout_seconds:g} seconds.\n"
     shown = list(display_command) if display_command is not None else command
     if shown:
         shown = ["python", *shown[1:]]
     return {
         "command": " ".join(shown),
-        "exit_status": completed.returncode,
-        "output": completed.stdout,
+        "exit_status": exit_status,
+        "output": output,
+        "timed_out": timed_out,
+        "wall_seconds": time.perf_counter() - started,
     }
 
 
@@ -118,7 +130,7 @@ def regenerate_result(
 ) -> tuple[dict[str, Any], dict[str, Any], Any | None]:
     generated_path = generated_root / Path(frozen_relative).name
     if generated_path.exists():
-        generated_path.unlink()
+        raise ValueError(f"fresh result path already exists: {generated_path}")
     command = [
         sys.executable,
         script,
@@ -146,6 +158,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--work-dir", type=Path,
+                        help="new directory outside the artifact; retained with raw evidence")
     args = parser.parse_args()
 
     requested = args.root.resolve()
@@ -155,22 +169,36 @@ def main() -> int:
     env = dict(os.environ)
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONHASHSEED"] = "0"
+    env["PYTHONUTF8"] = "1"
 
-    with tempfile.TemporaryDirectory(prefix="artifact-verify-") as temporary:
+    if args.work_dir is not None:
+        work = args.work_dir.resolve()
+        if work == source or source in work.parents:
+            parser.error("--work-dir must be outside the artifact")
+        work.mkdir(parents=True, exist_ok=False)
+    else:
+        work = Path(tempfile.mkdtemp(prefix="artifact-verify-"))
+    # Retain the isolated copy and regenerated results on success and failure.
+    # Raw diagnostics must survive a failed gate; no tree is removed here.
+    with nullcontext(work) as temporary:
         temporary_root = Path(temporary)
         copy_root = temporary_root / "artifact"
         generated_root = temporary_root / "regenerated"
         generated_root.mkdir(parents=True)
-        shutil.copytree(source, copy_root)
-        for path in copy_root.rglob("__pycache__"):
-            shutil.rmtree(path)
-        for path in copy_root.rglob("*.py[co]"):
-            path.unlink()
+        shutil.copytree(source, copy_root,
+                        ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"))
+
+        raw_root = temporary_root / "raw"
+        raw_root.mkdir()
+
+        def retain(name: str, execution: dict[str, Any]) -> None:
+            (raw_root / f"{name}.txt").write_text(execution["output"], encoding="utf-8")
 
         executions: dict[str, dict[str, Any]] = {}
         executions["unit_tests"] = run(
             [sys.executable, "run_tests.py"], copy_root, env
         )
+        retain("unit_tests", executions["unit_tests"])
 
         deterministic_specs = [
             (
@@ -206,6 +234,7 @@ def main() -> int:
                 env=env,
             )
             executions[name] = execution
+            retain(name, execution)
             comparisons[relative] = comparison
             generated_values[name] = value
 
@@ -239,6 +268,7 @@ def main() -> int:
             "generated_parse_error": audit_error,
         }
         executions["static_audit"] = audit_execution
+        retain("static_audit", audit_execution)
         audit = audit or {}
         generated = generated_values.get("generated_differential") or {}
         abstract = generated_values.get("abstract_model") or {}
@@ -274,6 +304,9 @@ def main() -> int:
                 name: {
                     "command": value["command"],
                     "exit_status": value["exit_status"],
+                    "timed_out": value["timed_out"],
+                    "wall_seconds": value["wall_seconds"],
+                    "raw_output": f"raw/{name}.txt",
                 }
                 for name, value in executions.items()
             },
@@ -304,6 +337,7 @@ def main() -> int:
             },
             "static_audit_from_fresh_output": audit.get("summary", {}),
             "bytecode_or_cache_residue": residue,
+            "retained_work_directory": str(temporary_root),
         }
 
     output.parent.mkdir(parents=True, exist_ok=True)

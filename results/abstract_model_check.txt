@@ -26,46 +26,60 @@
   "negative_controls": {
     "hidden_visibility_breaks_structural_identification": {
       "empty_patch": {
-        "actual_sufficient": true,
+        "actual_sufficient": false,
         "hidden_new_evidence": [
-          7
+          [
+            2,
+            9
+          ]
         ],
         "hidden_old_evidence": [
-          7
+          [
+            1,
+            7
+          ]
         ],
-        "predicted_sufficient": false,
+        "predicted_sufficient": true,
         "structural_equivalence_violated": true
       },
+      "hidden_final_read": [
+        2
+      ],
       "new_state": [
         1,
         7,
-        7
+        9
       ],
       "old_state": [
         0,
         7,
-        7
+        9
       ],
       "passed": true,
       "restored_complete_evidence": {
         "all_subsets_agree": true,
         "empty_patch_sufficient": false,
+        "final_read": [
+          0,
+          2
+        ],
         "new_evidence": [
           1,
-          7
+          9
         ],
         "old_evidence": [
           0,
           7
+        ],
+        "support": [
+          0
         ],
         "support_patch_sufficient": true
       },
       "selector_atom_block": [
         0
       ],
-      "support": [
-        0
-      ]
+      "support": []
     },
     "overlapping_write_breaks_upward_closure": {
       "passed": true,
