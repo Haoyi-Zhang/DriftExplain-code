@@ -34,6 +34,14 @@ jobs:
               --work-dir "$RUNNER_TEMP/p025-scientific/work" \
               --output "$RUNNER_TEMP/p025-scientific/verification.json" \
             2>&1 | tee "$RUNNER_TEMP/p025-scientific/raw/driver.txt"
+      - name: Check invocation-local support setup against the literal subset oracle
+        shell: bash
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          python -B -m unittest discover -s tests -p check_prepared_support.py -v \
+            2>&1 | tee "$RUNNER_TEMP/p025-scientific/raw/prepared-support.txt"
       - name: Upload raw output and fresh results even when a gate fails
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

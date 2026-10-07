@@ -603,6 +603,16 @@ def minimum_witness(
     changes = compute_delta(old, new)
     if len(changes) > maximum_changes:
         raise ValueError("change bound exceeded for exact witness admission")
+    return _minimum_witness_prepared(new, family, anchor, changes)
+
+
+def _minimum_witness_prepared(
+    new: dict[str, Any],
+    family: str,
+    anchor: str,
+    changes: list[dict[str, Any]],
+) -> list[str]:
+    """Select support from this call's admitted endpoint and complete delta."""
     after_targets = _targets(new)
     # Target absence is a distinct evidence reason, prior to rule lookup.
     if anchor not in after_targets:
@@ -683,7 +693,9 @@ def make_certificate(
         raise ValueError("candidate is outside the declared family-anchor space")
     classification, old_evidence, new_evidence = classify_candidate(old, new, family, anchor)
     delta = compute_delta(old, new)
-    witness = minimum_witness(old, new, family, anchor, maximum_changes)
+    if len(delta) > maximum_changes:
+        raise ValueError("change bound exceeded for exact witness admission")
+    witness = _minimum_witness_prepared(new, family, anchor, delta)
     return {
         "schema": "finite-finding-drift-certificate",
         "candidate": {"family": family, "anchor": anchor},

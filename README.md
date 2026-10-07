@@ -43,7 +43,8 @@ From this directory:
 PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python verify_artifact.py
 ```
 
-The command copies the artifact to an isolated directory and runs:
+The command copies the artifact to an isolated directory and runs the base
+finite gates:
 
 1. all 46 unit/regression tests;
 2. the independent stratified-frame enumerator;
@@ -82,6 +83,27 @@ uploaded even when a gate fails. This workflow is separate from source-syntax
 integrity checks and does not run the terminated historical campaign.
 
 ## Acceptance path and retained harnesses
+
+Certificate generation reuses its own admitted endpoints and complete delta
+for structural support selection. Public `minimum_witness` still validates
+its inputs and admission bound; the independent checker still reconstructs
+its deletion core and replays it without importing producer support code.
+
+An additional portable six-method regression scans complete evidence and
+enumerates literal subsets on 48 owned forward/reverse endpoint pairs, each
+with at most six changes. Run it separately from the 46-method base suite:
+
+```bash
+PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 python -B -m unittest discover -s tests -p check_prepared_support.py -v
+```
+
+The scientific workflow runs this explicit step and retains its output. Its
+name intentionally keeps it separate from `run_tests.py` discovery and the
+archived 46-method unit, resource, and one-command receipts. Those receipts
+are not evidence that this additional regression ran. Complete certificates,
+ordered delta/support, admission errors, input immutability, independent
+checker rejection, and semantic counters are checked; no runtime gain is
+measured or claimed.
 
 The current acceptance path is `run_tests.py`, the three bounded finite checks,
 `audit_static.py`, and `verify_artifact.py`.  `src/evaluate.py` and the campaign
