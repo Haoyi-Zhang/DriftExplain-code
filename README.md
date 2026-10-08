@@ -77,8 +77,9 @@ The interacting-delta regression distinguishes replacing a true alias with an
 unknown alias from appending the unknown alias: a retained true alias dominates.
 
 `.github/workflows/scientific-checks.yml` runs these finite gates from the flat
-artifact repository root on Ubuntu 24.04. Its whole run is limited to 300 seconds,
-with CPU, address-space and output-file bounds; raw output and fresh results are
+artifact repository root on Ubuntu 24.04. The verifier step is limited to 300 seconds,
+with CPU, address-space and output-file bounds. The separate prepared-support
+regressions run under the workflow's ten-minute job limit; raw output and fresh results are
 uploaded even when a gate fails. This workflow is separate from source-syntax
 integrity checks and does not run the terminated historical campaign.
 
