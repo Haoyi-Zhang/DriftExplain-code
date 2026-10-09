@@ -13,7 +13,7 @@ measured speed advantage.
 
 ## Relevance-first comparison set
 
-The final manuscript contains 67 unique scholarly references, all cited in the
+The manuscript contains 67 unique scholarly references, all cited in the
 text.  The comparison set spans eleven overlapping roles:
 
 1. dependence, slicing, and abstract interpretation (7);
