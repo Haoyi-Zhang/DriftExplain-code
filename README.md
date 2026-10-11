@@ -146,32 +146,32 @@ historical campaign branch or reopen its terminated resource budget.
 
 ## Main components
 
-- `src/producer.py` �� finite semantics, canonical endpoint delta, structural
+- `src/producer.py` — finite semantics, canonical endpoint delta, structural
   support, certificates, and conservative incremental reuse.
-- `src/checker.py` �� separately implemented admission, finite semantics, delta,
+- `src/checker.py` — separately implemented admission, finite semantics, delta,
   deletion-core identification, candidate verification, and certificate acceptance. It imports no
   producer or shared analysis module.
-- `candidate_query_check.py` �� same-promise Boolean enumeration and instrumented
+- `candidate_query_check.py` — same-promise Boolean enumeration and instrumented
   finite-record query comparison; invokes neither source programs nor campaigns.
-- `abstract_model_check.py` �� standard-library-only enumeration of bounded
+- `abstract_model_check.py` — standard-library-only enumeration of bounded
   stratified frames, endpoint pairs, atom partitions, all change subsets, and
   four executed premise-breaking controls and their restored-premise
   positive controls.
-- `monotone_core_check.py` �� standard-library-only enumeration of every Boolean
+- `monotone_core_check.py` — standard-library-only enumeration of every Boolean
   predicate on zero through four atoms.
-- `generated_differential_check.py` �� deterministic generated endpoint pairs,
+- `generated_differential_check.py` — deterministic generated endpoint pairs,
   producer/checker/exhaustive agreement, certificate checks, and container-order
   and bijective-renaming metamorphisms.
-- `tests/` �� 46 current tests for finite semantics, support, certificates,
+- `tests/` — 46 current tests for finite semantics, support, certificates,
   incrementality, admission, independent checks, and generated cases.
-- `proofs/` �� the abstract theorem, concrete instantiation, incremental theorem,
+- `proofs/` — the abstract theorem, concrete instantiation, incremental theorem,
   checker relation, counterexamples, and conditional source-lifting statement.
-- `theorem_assumption_matrix.csv` �� each theorem premise, where it is used, and
+- `theorem_assumption_matrix.csv` — each theorem premise, where it is used, and
   a failure construction or enforcement surface.
-- `claim_evidence_ledger.csv` �� paper claims mapped to proof, code, tests, raw
+- `claim_evidence_ledger.csv` — paper claims mapped to proof, code, tests, raw
   evidence, maturity, and current recheck status.
 - `citation_claim_map.csv`, `reference_verification.csv`, and
-  `literature_calibration.csv` �� citation use, bibliographic identity, and
+  `literature_calibration.csv` — citation use, bibliographic identity, and
   closest-work distinctions for all 67 cited publications.
 
 ## Current finite results
