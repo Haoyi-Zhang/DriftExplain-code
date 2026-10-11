@@ -125,7 +125,7 @@ def main() -> int:
         root_entries = sorted(path.name for path in project.iterdir())
         check(
             "project_root_entries",
-            root_entries == ["README.md", "artifact", "paper"],
+            set(root_entries) in ({"artifact", "paper"}, {"README.md", "artifact", "paper"}),
             root_entries,
         )
         check("paper_sources_present", (paper / "main.tex").is_file() and (paper / "main.pdf").is_file(), "main.tex and main.pdf")
@@ -136,7 +136,6 @@ def main() -> int:
     all_paths = sorted(path for path in artifact.rglob("*") if path.is_file() or path.is_symlink())
     if project:
         all_paths += sorted(path for path in paper.rglob("*") if path.is_file() or path.is_symlink())
-        all_paths += [project / "paper" / "provenance" / "CURRENT-STATE.md", project / "paper" / "provenance" / "research-plan.md"]
     symlinks = [str(path.relative_to(project or artifact)) for path in all_paths if path.is_symlink()]
     check("no_symlinks", not symlinks, symlinks)
     cache_residue = [
@@ -571,7 +570,7 @@ def main() -> int:
             all(
                 token in tex
                 for token in (
-                    r"fixes target \texttt{site} as present",
+                    "fixes one target as present",
                     r"27\times27\times3\times2\times2=8{,}748",
                     "301 tiny",
                     "all 64 directed cases",

@@ -7,10 +7,8 @@
     },
     {
       "detail": [
-        "CURRENT-STATE.md",
         "artifact",
-        "paper",
-        "research-plan.md"
+        "paper"
       ],
       "id": "project_root_entries",
       "status": "PASS"
@@ -48,7 +46,7 @@
     {
       "detail": {
         "errors": [],
-        "files": 20
+        "files": 24
       },
       "id": "python_ast",
       "status": "PASS"
@@ -231,46 +229,60 @@
       "detail": {
         "hidden_visibility_breaks_structural_identification": {
           "empty_patch": {
-            "actual_sufficient": true,
+            "actual_sufficient": false,
             "hidden_new_evidence": [
-              7
+              [
+                2,
+                9
+              ]
             ],
             "hidden_old_evidence": [
-              7
+              [
+                1,
+                7
+              ]
             ],
-            "predicted_sufficient": false,
+            "predicted_sufficient": true,
             "structural_equivalence_violated": true
           },
+          "hidden_final_read": [
+            2
+          ],
           "new_state": [
             1,
             7,
-            7
+            9
           ],
           "old_state": [
             0,
             7,
-            7
+            9
           ],
           "passed": true,
           "restored_complete_evidence": {
             "all_subsets_agree": true,
             "empty_patch_sufficient": false,
+            "final_read": [
+              0,
+              2
+            ],
             "new_evidence": [
               1,
-              7
+              9
             ],
             "old_evidence": [
               0,
               7
+            ],
+            "support": [
+              0
             ],
             "support_patch_sufficient": true
           },
           "selector_atom_block": [
             0
           ],
-          "support": [
-            0
-          ]
+          "support": []
         },
         "overlapping_write_breaks_upward_closure": {
           "passed": true,
@@ -466,7 +478,7 @@
     {
       "detail": {
         "errors": [],
-        "parsed": 49
+        "parsed": 55
       },
       "id": "json_parse",
       "status": "PASS"
@@ -479,7 +491,7 @@
     {
       "detail": {
         "errors": [],
-        "parsed": 19
+        "parsed": 20
       },
       "id": "csv_rectangular",
       "status": "PASS"
@@ -623,12 +635,12 @@
       "status": "PASS"
     },
     {
-      "detail": 10,
+      "detail": 11,
       "id": "theorem_assumption_matrix",
       "status": "PASS"
     },
     {
-      "detail": 21,
+      "detail": 23,
       "id": "claim_ledger_unique",
       "status": "PASS"
     },
@@ -685,7 +697,7 @@
       "status": "PASS"
     },
     {
-      "detail": 162,
+      "detail": 180,
       "id": "abstract_word_count",
       "status": "PASS"
     },
@@ -828,7 +840,7 @@
       "status": "PASS"
     },
     {
-      "detail": 45,
+      "detail": 46,
       "id": "latex_labels_unique",
       "status": "PASS"
     },
