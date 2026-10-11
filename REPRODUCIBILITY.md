@@ -24,6 +24,21 @@ and Unix; semantic and exact-byte comparisons remain required.
 
 ## Individual commands
 
+Candidate verification has an additional separate regression; the retained base
+suite and one-command receipts do not include it:
+
+```bash
+PYTHONPATH=src:.:tests python -B -m unittest discover -s tests -p check_candidate_verification.py -v
+python -B candidate_query_check.py --output results/candidate_verification
+```
+
+On Windows use `src;.;tests` for `PYTHONPATH`. Expected: nine tests pass; the
+query summary reports 5,461 support/candidate pairs, 127 accepted exact supports,
+zero decision or bound disagreements, and 12 finite-record comparisons. At
+64 delta atoms, candidate hybrid counts for supports of size 0/1/32/64 are
+1/2/33/64, versus 65 for identification plus core replay. These are benign
+owned models with the same principal-filter promise, not native source cases.
+
 ```bash
 OUT="$(mktemp -d)"
 PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python run_tests.py

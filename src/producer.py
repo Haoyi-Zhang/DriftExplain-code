@@ -836,7 +836,10 @@ def textual_baseline(
     operations: list[dict[str, Any]] | None = None,
     old_value: str | None = None,
 ) -> str:
-    """A source-only differencing baseline that ignores catalog/normalizer drift.
+    """An observation-only baseline that ignores catalog/normalizer drift.
+
+    Despite the retained function name, this reads authored finite target/raw
+    records, not source text. It has no parser or source-level correspondence.
 
     Callers processing many candidates from one version pair may pass the
     already-computed atomic delta.  This changes only reuse, not the baseline

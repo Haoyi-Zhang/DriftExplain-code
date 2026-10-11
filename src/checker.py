@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import copy
 import itertools
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 _ALLOWED = {"T", "F", "U"}
 
@@ -395,13 +395,76 @@ def enumerated_witness(
     raise AssertionError("no witness for full change set")
 
 
+def verify_candidate_witness(
+    delta_ids: list[str],
+    witness: list[str],
+    query: Callable[[frozenset[str]], bool],
+) -> bool:
+    """Verify a supplied least support, without identifying an unknown support.
+
+    Contract: delta_ids and witness are sorted duplicate-free string lists,
+    witness is a subset of delta_ids, and query is a deterministic Boolean
+    oracle promised to satisfy Q(S) iff H <= S for some unknown H <= D.
+    The result is True iff witness == H. The promise is not tested here.
+
+    For k=|witness|<d=|D|, query witness and then its k single deletions;
+    for witness==D, Q(D) is promised true and only the d deletions are needed.
+    Successful verification uses k+1 or d queries respectively; rejection
+    can stop early. With only upward closure, this tests inclusion-minimality,
+    not leastness or minimum cardinality. Inputs are not modified.
+    """
+    for values in (delta_ids, witness):
+        if (not isinstance(values, list)
+                or any(not isinstance(item, str) for item in values)
+                or len(values) != len(set(values)) or values != sorted(values)):
+            raise ValueError("noncanonical witness or delta")
+    universe, proposed = frozenset(delta_ids), frozenset(witness)
+    if not proposed <= universe:
+        raise ValueError("witness outside delta")
+    if proposed != universe and not query(proposed):
+        return False
+    for atom in witness:
+        if query(proposed - {atom}):
+            return False
+    return True
+
+
 def check_certificate(
     before: dict[str, Any],
     after: dict[str, Any],
     certificate: dict[str, Any],
     maximum_changes: int = 12,
 ) -> tuple[bool, str]:
-    """Return a decision and a stable diagnostic code."""
+    """Check via full-support identification and core replay (d+1 hybrids)."""
+    return _check_certificate(before, after, certificate, maximum_changes, False)
+
+
+def check_candidate_certificate(
+    before: dict[str, Any],
+    after: dict[str, Any],
+    certificate: dict[str, Any],
+    maximum_changes: int = 12,
+) -> tuple[bool, str]:
+    """Check the supplied witness under the same finite structural contract.
+
+    All admission, endpoint, classification, and complete-delta checks are
+    identical to check_certificate. Only the support algorithm differs: use
+    verify_candidate_witness against independently reconstructed exact evidence.
+    No producer selector, frame-footprint projection, or support discovery is
+    called. Under the finite principal-filter theorem this accepts exactly the
+    same certificates as check_certificate. See proofs/candidate_verification.md.
+    """
+    return _check_certificate(before, after, certificate, maximum_changes, True)
+
+
+def _check_certificate(
+    before: dict[str, Any],
+    after: dict[str, Any],
+    certificate: dict[str, Any],
+    maximum_changes: int,
+    candidate_only: bool,
+) -> tuple[bool, str]:
+    """Shared admission and evidence checks; two distinct support obligations."""
     if not isinstance(certificate, dict):
         return False, "certificate_shape"
     if (
@@ -458,6 +521,17 @@ def check_certificate(
         return False, "witness_order"
     if any(item not in change_ids for item in witness):
         return False, "witness_member"
+    if candidate_only:
+        def query(selected: frozenset[str]) -> bool:
+            operations = [entry for entry in changes if entry["id"] in selected]
+            hybrid = _patch(before, operations)
+            return _family_result(hybrid, family, anchor) == right
+
+        try:
+            verified = verify_candidate_witness(change_ids, witness, query)
+        except (ValueError, AssertionError):
+            return False, "witness_consistency"
+        return (True, "accepted") if verified else (False, "witness_minimality")
     try:
         expected = _least_witness(before, after, family, anchor, declared_bound)
     except ValueError:

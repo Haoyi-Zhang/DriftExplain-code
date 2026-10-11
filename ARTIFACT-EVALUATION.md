@@ -13,6 +13,12 @@
 5. **Cross-surface consistency and package hygiene.** Run
    `python audit_static.py --root .`.
 6. **All checks in an isolated copy.** Run `python verify_artifact.py`; confirm that each fresh-output comparison is `PASS` and that the verifier mutation tests pass only because their deliberately corrupted cases are rejected.
+7. **Identification versus supplied-candidate verification.** Run the separate
+   nine-method `check_candidate_verification.py` regression as documented in
+   `REPRODUCIBILITY.md`, then `python -B candidate_query_check.py --output
+   results/candidate_verification`. Inspect the exact contract and proof in
+   `proofs/candidate_verification.md`. Both query algorithms have the same
+   principal-filter promise; only verification receives a proposed support.
 
 The complete sequence requires no external dependency and normally finishes in
 seconds on an ordinary CPU.

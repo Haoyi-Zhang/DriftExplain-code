@@ -1,0 +1,13 @@
+delta_atoms,support_atoms,identification_checker_hybrid_replays,candidate_verifier_hybrid_replays,identification_checker_evidence_evaluations,candidate_verifier_evidence_evaluations,both_accept
+16,0,17,1,20,3,True
+16,1,17,2,20,4,True
+16,8,17,9,20,11,True
+16,16,17,16,20,18,True
+32,0,33,1,36,3,True
+32,1,33,2,36,4,True
+32,16,33,17,36,19,True
+32,32,33,32,36,34,True
+64,0,65,1,68,3,True
+64,1,65,2,68,4,True
+64,32,65,33,68,35,True
+64,64,65,64,68,66,True

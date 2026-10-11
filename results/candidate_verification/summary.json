@@ -1,0 +1,126 @@
+{
+  "boolean": {
+    "accepted_exact_supports": 127,
+    "decision_disagreements": 0,
+    "identification_queries_across_supports": 642,
+    "maximum_atoms": 6,
+    "query_bound_violations": 0,
+    "support_candidate_pairs": 5461,
+    "upward_only_control_has_two_accepted_inclusion_minima": true,
+    "verification_queries_across_support_candidate_pairs": 7266
+  },
+  "finite_query_counts": [
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 3,
+      "candidate_verifier_hybrid_replays": 1,
+      "delta_atoms": 16,
+      "identification_checker_evidence_evaluations": 20,
+      "identification_checker_hybrid_replays": 17,
+      "support_atoms": 0
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 4,
+      "candidate_verifier_hybrid_replays": 2,
+      "delta_atoms": 16,
+      "identification_checker_evidence_evaluations": 20,
+      "identification_checker_hybrid_replays": 17,
+      "support_atoms": 1
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 11,
+      "candidate_verifier_hybrid_replays": 9,
+      "delta_atoms": 16,
+      "identification_checker_evidence_evaluations": 20,
+      "identification_checker_hybrid_replays": 17,
+      "support_atoms": 8
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 18,
+      "candidate_verifier_hybrid_replays": 16,
+      "delta_atoms": 16,
+      "identification_checker_evidence_evaluations": 20,
+      "identification_checker_hybrid_replays": 17,
+      "support_atoms": 16
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 3,
+      "candidate_verifier_hybrid_replays": 1,
+      "delta_atoms": 32,
+      "identification_checker_evidence_evaluations": 36,
+      "identification_checker_hybrid_replays": 33,
+      "support_atoms": 0
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 4,
+      "candidate_verifier_hybrid_replays": 2,
+      "delta_atoms": 32,
+      "identification_checker_evidence_evaluations": 36,
+      "identification_checker_hybrid_replays": 33,
+      "support_atoms": 1
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 19,
+      "candidate_verifier_hybrid_replays": 17,
+      "delta_atoms": 32,
+      "identification_checker_evidence_evaluations": 36,
+      "identification_checker_hybrid_replays": 33,
+      "support_atoms": 16
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 34,
+      "candidate_verifier_hybrid_replays": 32,
+      "delta_atoms": 32,
+      "identification_checker_evidence_evaluations": 36,
+      "identification_checker_hybrid_replays": 33,
+      "support_atoms": 32
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 3,
+      "candidate_verifier_hybrid_replays": 1,
+      "delta_atoms": 64,
+      "identification_checker_evidence_evaluations": 68,
+      "identification_checker_hybrid_replays": 65,
+      "support_atoms": 0
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 4,
+      "candidate_verifier_hybrid_replays": 2,
+      "delta_atoms": 64,
+      "identification_checker_evidence_evaluations": 68,
+      "identification_checker_hybrid_replays": 65,
+      "support_atoms": 1
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 35,
+      "candidate_verifier_hybrid_replays": 33,
+      "delta_atoms": 64,
+      "identification_checker_evidence_evaluations": 68,
+      "identification_checker_hybrid_replays": 65,
+      "support_atoms": 32
+    },
+    {
+      "both_accept": true,
+      "candidate_verifier_evidence_evaluations": 66,
+      "candidate_verifier_hybrid_replays": 64,
+      "delta_atoms": 64,
+      "identification_checker_evidence_evaluations": 68,
+      "identification_checker_hybrid_replays": 65,
+      "support_atoms": 64
+    }
+  ],
+  "finite_record_cases": 12,
+  "input_boundary": "owned finite records; no native/source frontend",
+  "metric": "Boolean oracle calls and instrumented hybrid/evidence calls; no timing",
+  "promise": "Q(S) iff hidden support is a subset of S for both algorithms"
+}

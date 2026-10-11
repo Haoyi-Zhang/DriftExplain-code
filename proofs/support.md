@@ -187,6 +187,12 @@ with necessity, this proves the principal-filter property and unique minimum.
 
 ## Independent deletion checker
 
+This section describes full-support identification by `check_certificate`.
+The separate `check_candidate_certificate` verifies a proposed support using
+the same admitted endpoints, complete delta, and exact-evidence predicate but
+without support discovery. Its tight candidate-relative query bounds and
+soundness/completeness argument are in `candidate_verification.md`.
+
 For each atom `d` in the full delta, the checker applies `D minus {d}` to the old
 input and compares framed final evidence. These `|D|` answers construct the
 deletion core

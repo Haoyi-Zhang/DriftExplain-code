@@ -174,6 +174,12 @@ not covered: merging identities can overlap footprints or create alternatives.
 
 ## 9. Optimal replay-query identification
 
+This is identification of an unknown generator, not verification of a supplied
+candidate. Under exactly the same principal-filter promise, the latter has tight
+query bounds k+1 for a proper k-atom candidate and d for the full delta. Its
+algorithm, soundness/completeness, lower bound, finite certificate integration,
+and monotonicity-only boundary are given in `candidate_verification.md`.
+
 Assume a checker cannot inspect the frame or footprints and may only query the
 binary predicate `Q(S)`. Let `d = |D|`. Every subset of `D` is realizable as a
 support within the theorem's class: for a chosen `W subseteq D`, use one stratum,
@@ -216,7 +222,7 @@ member, it would be contained in every sufficient set and would therefore be a
 least member. Thus core-replay failure entails at least two incomparable
 inclusion-minimal sufficient sets.
 
-The delivered checker therefore uses the `d` co-singleton replays to construct
+The delivered identification checker therefore uses the `d` co-singleton replays to construct
 `C_Q` and replays `C_Q` once. Under the principal-filter theorem,
 `C_Q=W_F` and that replay succeeds. More generally, under an independently
 established upward-closure premise, failure of the core replay proves that no
@@ -339,6 +345,13 @@ possibly support. Stable identity or an independently checked correspondence
 certificate is therefore an admission premise.
 
 ## 12. Certificate acceptance
+
+The acceptance relation below describes `check_certificate`, which identifies
+the deletion core. `check_candidate_certificate` shares its admission and
+required-field equalities but checks Q(W) and all single deletions from W;
+under the same concrete structural theorem it accepts exactly the same valid
+least-support certificates. See `candidate_verification.md` for the proof and
+its smaller candidate-relative query bound.
 
 For valid finite endpoints, the checker first admits the certificate's schema
 and candidate in the union family-anchor space, nonboolean integer bounds

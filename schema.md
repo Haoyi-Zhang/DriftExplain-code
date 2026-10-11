@@ -109,6 +109,17 @@ producer could fabricate mutually consistent certificate fields.
 
 ## Acceptance relation and diagnostics
 
+Two public entry points share the exact admission and required-field checks.
+`check_certificate` identifies and replays the deletion core as described below.
+`check_candidate_certificate` instead verifies the supplied W: Q(W) must hold
+and Q(W minus {a}) must fail for every a in W. When W is the full delta, Q(W)
+is provided by the admitted principal-filter promise and is not queried.
+Under that same promise, acceptance is equivalent to W being the unique least
+support; no producer selector or support identification is invoked. A missing
+atom or a sufficient strict superset yields `witness_minimality`; patch/evaluator
+consistency failures yield `witness_consistency`. Upward closure alone only
+justifies inclusion-minimality, not leastness. See `proofs/candidate_verification.md`.
+
 The checker independently reconstructs endpoint evidence, class, the endpoint
 information that fixes the conceptual frame, the delta, and the deletion core. It
 imports no producer module. For each atom it replays the complete delta without
@@ -131,7 +142,7 @@ replay to succeed. Representative stable diagnostics include:
 - `witness_minimality` when the supplied set differs from the deletion core; and
 - `witness_consistency` when the reconstructed core itself fails replay.
 
-The final code distinguishes the last condition from an input-bound failure. A
+The identification path distinguishes the last condition from an input-bound failure. A
 failed core replay is an implementation inconsistency under the structural
 premises. If upward closure and full-delta sufficiency are established
 independently, it instead proves that no least sufficient set exists. Without

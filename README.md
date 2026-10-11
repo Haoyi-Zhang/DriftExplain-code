@@ -13,7 +13,11 @@ complete key-addressed evidence, and an endpoint delta whose observable atom
 footprints are disjoint and complete, the sufficient change subsets are exactly
 the supersets of the atoms read by the final evidence traversal.  The producer
 computes that structural projection.  The checker is denied the projection and
-recovers the deletion core by replay.
+can either recover the deletion core by replay or verify a supplied support.
+Identification of an unknown support needs d queries in the worst case;
+verification under the same principal-filter promise needs k+1 for a supplied
+proper k-atom support, or d for the full delta. The identification lower bound
+is not a verification lower bound.
 
 The artifact does **not** provide a Solidity parser, a source-to-fact soundness
 argument, a 120-contract corpus, historical source/rule evolution, production
@@ -85,6 +89,32 @@ integrity checks and does not run the terminated historical campaign.
 
 ## Acceptance path and retained harnesses
 
+`checker.check_candidate_certificate` is a second acceptance entry point. It
+shares all endpoint, class, complete-delta, bound, and canonical-witness checks
+with `check_certificate`, but tests the supplied witness and its own deletions
+instead of discovering the support. It uses no producer support code. Under the
+finite principal-filter theorem both paths accept exactly the same certificates;
+monotonicity alone would justify only inclusion-minimality for the candidate path.
+The exact contract, soundness/completeness proof, and matching query lower bound
+are in `proofs/candidate_verification.md`.
+
+Run the separate nine-method candidate regression and query benchmark from the
+artifact root (on Windows, use `;` in `PYTHONPATH`):
+
+```bash
+PYTHONPATH=src:.:tests python -B -m unittest discover -s tests -p check_candidate_verification.py -v
+python -B candidate_query_check.py --output results/candidate_verification
+```
+
+The candidate regression is explicitly separate from the retained 46-method
+base receipts and the one-command verifier. The benchmark checks 5,461
+support/candidate pairs over all principal filters through six atoms, and 12
+owned finite-record pairs through 64 atoms. At d=64 and k=1, instrumented hybrid
+counts are 65 for identification plus core replay versus 2 for candidate
+verification, under identical promises. CSV/JSON results are under
+`results/candidate_verification/`; these are query counts, not a speedup or
+native-frontend measurement.
+
 Certificate generation reuses its own admitted endpoints and complete delta
 for structural support selection. Public `minimum_witness` still validates
 its inputs and admission bound; the independent checker still reconstructs
@@ -116,30 +146,32 @@ historical campaign branch or reopen its terminated resource budget.
 
 ## Main components
 
-- `src/producer.py` — finite semantics, canonical endpoint delta, structural
+- `src/producer.py` �� finite semantics, canonical endpoint delta, structural
   support, certificates, and conservative incremental reuse.
-- `src/checker.py` — separately implemented admission, finite semantics, delta,
-  deletion-core reconstruction, and certificate acceptance.  It imports no
+- `src/checker.py` �� separately implemented admission, finite semantics, delta,
+  deletion-core identification, candidate verification, and certificate acceptance. It imports no
   producer or shared analysis module.
-- `abstract_model_check.py` — standard-library-only enumeration of bounded
+- `candidate_query_check.py` �� same-promise Boolean enumeration and instrumented
+  finite-record query comparison; invokes neither source programs nor campaigns.
+- `abstract_model_check.py` �� standard-library-only enumeration of bounded
   stratified frames, endpoint pairs, atom partitions, all change subsets, and
   four executed premise-breaking controls and their restored-premise
   positive controls.
-- `monotone_core_check.py` — standard-library-only enumeration of every Boolean
+- `monotone_core_check.py` �� standard-library-only enumeration of every Boolean
   predicate on zero through four atoms.
-- `generated_differential_check.py` — deterministic generated endpoint pairs,
+- `generated_differential_check.py` �� deterministic generated endpoint pairs,
   producer/checker/exhaustive agreement, certificate checks, and container-order
   and bijective-renaming metamorphisms.
-- `tests/` — 46 current tests for finite semantics, support, certificates,
+- `tests/` �� 46 current tests for finite semantics, support, certificates,
   incrementality, admission, independent checks, and generated cases.
-- `proofs/` — the abstract theorem, concrete instantiation, incremental theorem,
+- `proofs/` �� the abstract theorem, concrete instantiation, incremental theorem,
   checker relation, counterexamples, and conditional source-lifting statement.
-- `theorem_assumption_matrix.csv` — each theorem premise, where it is used, and
+- `theorem_assumption_matrix.csv` �� each theorem premise, where it is used, and
   a failure construction or enforcement surface.
-- `claim_evidence_ledger.csv` — paper claims mapped to proof, code, tests, raw
+- `claim_evidence_ledger.csv` �� paper claims mapped to proof, code, tests, raw
   evidence, maturity, and current recheck status.
 - `citation_claim_map.csv`, `reference_verification.csv`, and
-  `literature_calibration.csv` — citation use, bibliographic identity, and
+  `literature_calibration.csv` �� citation use, bibliographic identity, and
   closest-work distinctions for all 67 cited publications.
 
 ## Current finite results

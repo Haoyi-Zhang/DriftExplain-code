@@ -37,14 +37,16 @@ or a metadata-only rule edit can trigger a value recomputation. Both old and new
 dependencies are needed to avoid losing newly added or removed reads. Exact
 new-evidence support and conservative endpoint impact are different relations.
 
-## Source-only indistinguishability
+## Observation-only indistinguishability
 
 Keep target observations fixed with an old true rule. One new model leaves its
 rules and mappings unchanged; another removes a required mapping, with no
-independent refutation. The old/new raw inputs seen by a source-only observer
+independent refutation. The old/new raw inputs seen by an observation-only observer
 are identical, while the correct classes are preserved and unresolved. Such an
 observer cannot classify all pairs. This result says nothing about an analyzer
-that actually receives the catalogue and normalization inputs.
+that actually receives the catalogue and normalization inputs. The implemented
+baseline reads finite raw records, not source text; this argument does not
+establish a result about a native parser or source-semantic observer.
 
 ## Conditional scenario-property bridge
 

@@ -13,6 +13,11 @@ def load_public_fixtures(path: str | Path) -> list[dict[str, Any]]:
 
 
 def _public_model(fixture: dict[str, Any], guard_state: str = "F") -> dict[str, Any]:
+    """Build an authored fact abstraction; source path/line strings are labels.
+
+    No source is fetched or parsed and no native-case claim follows from these
+    labels. The truth assignments and four interventions are hand-specified.
+    """
     raw: dict[str, str] = {}
     origins: dict[str, str] = {}
     normalizer: dict[str, list[str]] = {}
