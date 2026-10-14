@@ -1,0 +1,85 @@
+{
+  "counterexample_examples": [],
+  "negative_control": {
+    "executed_overwrite_state_machine": {
+      "atom_order": [
+        "a writes 1",
+        "b writes 0"
+      ],
+      "deletion_core": "{b}",
+      "deletion_core_sufficient": true,
+      "minimal_sufficient_sets": [
+        "{}"
+      ],
+      "subset_results": {
+        "{a,b}": {
+          "final_state": 0,
+          "sufficient": true
+        },
+        "{a}": {
+          "final_state": 1,
+          "sufficient": false
+        },
+        "{b}": {
+          "final_state": 0,
+          "sufficient": true
+        },
+        "{}": {
+          "final_state": 0,
+          "sufficient": true
+        }
+      },
+      "sufficient_set_intersection": "{}",
+      "theorem_failure_observed": true,
+      "upward_closed": false
+    },
+    "passed": true,
+    "restored_monotone_positive_control": {
+      "deletion_core": "{a}",
+      "minimal_sufficient_sets": [
+        "{a}"
+      ],
+      "positive_control_passed": true,
+      "predicate": "a is selected",
+      "principal_filter": true,
+      "sufficient_set_intersection": "{a}",
+      "upward_closed": true
+    }
+  },
+  "per_dimension": [
+    {
+      "atoms": 0,
+      "predicates_examined": 2,
+      "upward_full_accepting": 1
+    },
+    {
+      "atoms": 1,
+      "predicates_examined": 4,
+      "upward_full_accepting": 2
+    },
+    {
+      "atoms": 2,
+      "predicates_examined": 16,
+      "upward_full_accepting": 5
+    },
+    {
+      "atoms": 3,
+      "predicates_examined": 256,
+      "upward_full_accepting": 19
+    },
+    {
+      "atoms": 4,
+      "predicates_examined": 65536,
+      "upward_full_accepting": 167
+    }
+  ],
+  "scope": "all Boolean predicates through 4 atoms; general theorem still relies on proof",
+  "status": "PASS",
+  "totals": {
+    "all_predicates_examined": 65814,
+    "counterexamples": 0,
+    "dimensions": 5,
+    "theorem_checks": 970,
+    "upward_predicates": 194
+  }
+}

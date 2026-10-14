@@ -80,6 +80,37 @@ hybrid patch/copy/validation cost and E is one candidate evaluation, its replay
 work is O((k+1)(P+E)), besides admission and endpoint/delta construction. This
 is a query bound, not a runtime, memory, extraction, or deployment guarantee.
 
+## Structure-visible receiver correspondence
+
+`check_structural_certificate` has the same endpoint, class, complete-delta,
+bound and witness-shape admission as the two replay paths. It then scans the
+independently reconstructed complete final evidence and the independently
+reconstructed endpoint atom bodies. Unlike the binary-oracle task, it can read
+the representation that determines visibility and coordinate ownership.
+
+For a final absent target, the distinct absence branch forces exactly its target
+deletion. For a present target, a one-sided target atom is forced by presence.
+Every rule atom with a changed family projection is forced, including deleted
+or moved-out rules whose identities remain in the endpoint-union frame. Final
+literal records expose exactly their normalizer names; their complete
+observations expose exactly the final alias value-origin coordinates. The scan
+selects the changed mapping and program atoms at those coordinates. Metadata
+outside the projection is not a read. These cases exhaust the four admitted
+atom constructors, so the scan returns exactly the concrete `W_x` in support.md.
+The principal-filter theorem therefore gives soundness and completeness of
+comparing the supplied witness with this scan, conditional on the same finite
+semantics and representation premises. This is implementation correspondence
+with the existing projection theorem, not a new generic minimal-set theorem.
+
+This path performs two endpoint evaluations and one complete delta construction,
+and no hybrid evaluations. It still reads/validates the full inputs and scans
+all atom bodies and final evidence. Its zero membership calls do not contradict
+the d-query identification or candidate-relative verification bounds: those
+bounds deny structure access. The identification implementation likewise reuses
+its invocation-local admitted delta and final evidence, rather than rebuilding
+them; it still performs d co-singleton hybrids plus one core replay. This reuse
+changes neither the predicate nor its query count and is not a timing result.
+
 ## Boundary: monotonicity alone is insufficient for leastness
 
 For D={x,y} and Q(S)=[x in S or y in S], W={x} passes the sufficiency and

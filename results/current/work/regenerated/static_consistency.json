@@ -1,0 +1,680 @@
+{
+  "checks": [
+    {
+      "detail": ".",
+      "id": "artifact_root_exists",
+      "status": "PASS"
+    },
+    {
+      "detail": "standalone artifact root",
+      "id": "artifact_has_no_paper_tree",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_symlinks",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_cache_or_bytecode",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_nested_archives",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_workflow_or_release_residue",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_private_path_or_placeholder",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "errors": [],
+        "files": 21
+      },
+      "id": "python_ast",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "count": 46,
+        "methods": [
+          "test_abstract_model_check.py:test_bounded_model_check_and_executed_negative_controls",
+          "test_abstract_model_check.py:test_model_checker_has_no_project_imports",
+          "test_admission.py:test_checker_diagnostic_matrix",
+          "test_admission.py:test_extended_malformed_forms_are_rejected_by_both_implementations",
+          "test_admission.py:test_incremental_cache_requires_exact_union_space",
+          "test_admission.py:test_producer_rejects_invalid_candidate_and_bounds",
+          "test_admission.py:test_validate_version_rejects_malformed_structures",
+          "test_generated_differential.py:test_bijective_renaming_metamorphism",
+          "test_generated_differential.py:test_container_order_metamorphism",
+          "test_generated_differential.py:test_generated_differential_has_no_disagreement",
+          "test_generated_differential.py:test_generated_surface_is_nontrivial",
+          "test_monotone_core_check.py:test_all_monotone_predicates_and_executed_negative_control",
+          "test_monotone_core_check.py:test_independent_imports",
+          "test_public.py:test_public_pattern_matrix",
+          "test_results.py:test_frozen_result_invariants",
+          "test_semantics.py:test_checker_accepts_and_rejects",
+          "test_semantics.py:test_detailed_and_compact_paths_agree",
+          "test_semantics.py:test_four_change_classes",
+          "test_semantics.py:test_identifier_grammar_prevents_serialized_key_collisions",
+          "test_semantics.py:test_incorrect_cache_value_is_not_authenticated",
+          "test_semantics.py:test_incremental_equals_full",
+          "test_semantics.py:test_incremental_validates_old_endpoint_with_supplied_cache",
+          "test_semantics.py:test_minimum_witness_is_cardinality_first_and_lexical",
+          "test_semantics.py:test_witness_reproduces_the_final_evidence_path",
+          "test_support.py:test_added_target_and_old_only_family_rule_are_both_observable",
+          "test_support.py:test_added_target_is_atomic_and_not_split_into_program_changes",
+          "test_support.py:test_alias_order_is_evidence",
+          "test_support.py:test_all_aliases_are_observed_even_when_one_decides_value",
+          "test_support.py:test_checker_has_no_producer_or_shared_analysis_import",
+          "test_support.py:test_closed_world_origin_without_explicit_raw_is_observed",
+          "test_support.py:test_contradictory_literal_has_declared_three_valued_semantics",
+          "test_support.py:test_directed_shapes_agree_with_two_exhaustive_oracles",
+          "test_support.py:test_family_move_changes_both_projections",
+          "test_support.py:test_full_patch_is_effectively_not_syntactically_equal",
+          "test_support.py:test_ignored_rule_metadata_has_no_support",
+          "test_support.py:test_invalid_admission_bound_does_not_become_semantic_uncertainty",
+          "test_support.py:test_larger_bound_is_explicit_not_self_authorized",
+          "test_support.py:test_missing_essential_and_surplus_witness_are_rejected",
+          "test_support.py:test_only_final_aliases_require_observation_changes",
+          "test_support.py:test_origin_only_support_with_unchanged_value",
+          "test_support.py:test_target_absence_precedes_rule_and_normalizer_lookup",
+          "test_support.py:test_value_only_counterexample_has_two_alternative_minima",
+          "test_verify_artifact.py:test_changed_frozen_field_is_fail",
+          "test_verify_artifact.py:test_current_abstract_and_monotone_generators_write_fresh_matching_outputs",
+          "test_verify_artifact.py:test_forbidden_format_conflict_is_fail",
+          "test_verify_artifact.py:test_missing_fresh_output_is_fail"
+        ]
+      },
+      "id": "current_test_inventory",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "logged": 46,
+        "source_inventory": 46
+      },
+      "id": "current_unit_execution",
+      "status": "PASS"
+    },
+    {
+      "detail": [
+        "__future__",
+        "copy",
+        "itertools",
+        "typing"
+      ],
+      "id": "checker_import_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": [
+        "__future__",
+        "argparse",
+        "itertools",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "id": "abstract_model_check_import_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": [
+        "__future__",
+        "argparse",
+        "json",
+        "pathlib"
+      ],
+      "id": "monotone_core_check_import_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "id": "abstract_check_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "atom_partitions": 37048,
+        "counterexamples": 0,
+        "endpoint_pairs": 6536,
+        "subset_replays": 192176
+      },
+      "id": "abstract_check_no_disagreement",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "id": "monotone_check_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "all_predicates_examined": 65814,
+        "counterexamples": 0,
+        "dimensions": 5,
+        "theorem_checks": 970,
+        "upward_predicates": 194
+      },
+      "id": "monotone_check_no_disagreement",
+      "status": "PASS"
+    },
+    {
+      "detail": "PASS",
+      "id": "generated_check_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "bijective_renaming_checks": 240,
+        "candidate_pairs": 240,
+        "certificate_checks": 240,
+        "container_order_checks": 240,
+        "disagreements": 0,
+        "exhaustive_candidates": 48,
+        "generated_endpoint_pairs": 60,
+        "subset_replays": 1176
+      },
+      "id": "generated_check_no_disagreement",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "atom_partitions": 37048,
+        "counterexamples": 0,
+        "endpoint_pairs": 6536,
+        "subset_replays": 192176
+      },
+      "id": "abstract_check_scope",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "configuration": {
+          "endpoint_pair_scope": "ordered non-identical endpoint pairs",
+          "selector_domain_sizes": [
+            2,
+            3
+          ]
+        },
+        "totals": {
+          "atom_partitions": 37048,
+          "counterexamples": 0,
+          "endpoint_pairs": 6536,
+          "subset_replays": 192176
+        }
+      },
+      "id": "abstract_domain_accounting",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "hidden_visibility_breaks_structural_identification": {
+          "empty_patch": {
+            "actual_sufficient": false,
+            "hidden_new_evidence": [
+              [
+                2,
+                9
+              ]
+            ],
+            "hidden_old_evidence": [
+              [
+                1,
+                7
+              ]
+            ],
+            "predicted_sufficient": true,
+            "structural_equivalence_violated": true
+          },
+          "hidden_final_read": [
+            2
+          ],
+          "new_state": [
+            1,
+            7,
+            9
+          ],
+          "old_state": [
+            0,
+            7,
+            9
+          ],
+          "passed": true,
+          "restored_complete_evidence": {
+            "all_subsets_agree": true,
+            "empty_patch_sufficient": false,
+            "final_read": [
+              0,
+              2
+            ],
+            "new_evidence": [
+              1,
+              9
+            ],
+            "old_evidence": [
+              0,
+              7
+            ],
+            "support": [
+              0
+            ],
+            "support_patch_sufficient": true
+          },
+          "selector_atom_block": [
+            0
+          ],
+          "support": []
+        },
+        "overlapping_write_breaks_upward_closure": {
+          "passed": true,
+          "restored_disjoint_endpoint_blocks": {
+            "evaluations": {
+              "a": false,
+              "a_b": true,
+              "b": false,
+              "empty": false
+            },
+            "upward_principal_filter_restored": true
+          },
+          "sequential_write_evaluations": {
+            "a": false,
+            "a_b": true,
+            "b": true,
+            "empty": true
+          },
+          "upward_closure_violation_observed": true
+        },
+        "unstable_identity_breaks_coordinate_correspondence": {
+          "new_keyed_state": [
+            [
+              "x",
+              2
+            ],
+            [
+              "y",
+              1
+            ]
+          ],
+          "old_keyed_state": [
+            [
+              "x",
+              1
+            ],
+            [
+              "y",
+              2
+            ]
+          ],
+          "passed": true,
+          "restored_stable_identity": {
+            "changed_identities": [
+              "x",
+              "y"
+            ],
+            "correspondence": {
+              "x": "x",
+              "y": "y"
+            },
+            "empty_patch_reaches_new": false,
+            "full_patch_reaches_new": true,
+            "positive_control_passed": true
+          },
+          "unstable_correspondence": {
+            "x": "y",
+            "y": "x"
+          },
+          "unstable_positional_views": {
+            "failure_observed": true,
+            "keyed_endpoints_differ": true,
+            "masked_changes": [],
+            "new": [
+              1,
+              2
+            ],
+            "old": [
+              1,
+              2
+            ]
+          }
+        },
+        "value_only_incomparable_minima": {
+          "executed_predicate_values": {
+            "a": true,
+            "a_b": true,
+            "b": true,
+            "empty": false
+          },
+          "incomparable_minimal_sufficient_sets": [
+            [
+              "a"
+            ],
+            [
+              "b"
+            ]
+          ],
+          "passed": true,
+          "restored_complete_evidence": {
+            "minimal_sufficient_sets": [
+              [
+                "a",
+                "b"
+              ]
+            ],
+            "unique_least_restored": true
+          }
+        }
+      },
+      "id": "abstract_negative_controls_executed",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "all_predicates_examined": 65814,
+        "counterexamples": 0,
+        "dimensions": 5,
+        "theorem_checks": 970,
+        "upward_predicates": 194
+      },
+      "id": "monotone_check_scope",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "executed_overwrite_state_machine": {
+          "atom_order": [
+            "a writes 1",
+            "b writes 0"
+          ],
+          "deletion_core": "{b}",
+          "deletion_core_sufficient": true,
+          "minimal_sufficient_sets": [
+            "{}"
+          ],
+          "subset_results": {
+            "{a,b}": {
+              "final_state": 0,
+              "sufficient": true
+            },
+            "{a}": {
+              "final_state": 1,
+              "sufficient": false
+            },
+            "{b}": {
+              "final_state": 0,
+              "sufficient": true
+            },
+            "{}": {
+              "final_state": 0,
+              "sufficient": true
+            }
+          },
+          "sufficient_set_intersection": "{}",
+          "theorem_failure_observed": true,
+          "upward_closed": false
+        },
+        "passed": true,
+        "restored_monotone_positive_control": {
+          "deletion_core": "{a}",
+          "minimal_sufficient_sets": [
+            "{a}"
+          ],
+          "positive_control_passed": true,
+          "predicate": "a is selected",
+          "principal_filter": true,
+          "sufficient_set_intersection": "{a}",
+          "upward_closed": true
+        }
+      },
+      "id": "monotone_negative_control_executed",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "bijective_renaming_checks": 240,
+        "candidate_pairs": 240,
+        "certificate_checks": 240,
+        "container_order_checks": 240,
+        "disagreements": 0,
+        "exhaustive_candidates": 48,
+        "generated_endpoint_pairs": 60,
+        "subset_replays": 1176
+      },
+      "id": "generated_check_scope",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "bijective_renaming_checks": 240,
+        "candidate_pairs": 240,
+        "certificate_checks": 240,
+        "container_order_checks": 240,
+        "disagreements": 0,
+        "exhaustive_candidates": 48,
+        "generated_endpoint_pairs": 60,
+        "subset_replays": 1176
+      },
+      "id": "generated_metamorphic_scope",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "errors": [],
+        "parsed": 49
+      },
+      "id": "json_parse",
+      "status": "PASS"
+    },
+    {
+      "detail": [],
+      "id": "no_project_schema_version_metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "errors": [],
+        "parsed": 19
+      },
+      "id": "csv_rectangular",
+      "status": "PASS"
+    },
+    {
+      "detail": 9,
+      "id": "authored_fixture_count",
+      "status": "PASS"
+    },
+    {
+      "detail": 9,
+      "id": "source_selection_count",
+      "status": "PASS"
+    },
+    {
+      "detail": "selection rows explicitly deny source-level validation",
+      "id": "source_selection_boundary",
+      "status": "PASS"
+    },
+    {
+      "detail": 36,
+      "id": "certificate_count",
+      "status": "PASS"
+    },
+    {
+      "detail": 36,
+      "id": "retained_public_interventions",
+      "status": "PASS"
+    },
+    {
+      "detail": 638,
+      "id": "retained_fault_injections",
+      "status": "PASS"
+    },
+    {
+      "detail": 4374,
+      "id": "retained_exhaustive_grid",
+      "status": "PASS"
+    },
+    {
+      "detail": "README.md",
+      "id": "present_readme_md",
+      "status": "PASS"
+    },
+    {
+      "detail": "REPRODUCIBILITY.md",
+      "id": "present_reproducibility_md",
+      "status": "PASS"
+    },
+    {
+      "detail": "ARTIFACT-EVALUATION.md",
+      "id": "present_artifact_evaluation_md",
+      "status": "PASS"
+    },
+    {
+      "detail": "CITATION.cff",
+      "id": "present_citation_cff",
+      "status": "PASS"
+    },
+    {
+      "detail": "schema.md",
+      "id": "present_schema_md",
+      "status": "PASS"
+    },
+    {
+      "detail": "run_tests.py",
+      "id": "present_run_tests_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "verify_artifact.py",
+      "id": "present_verify_artifact_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "abstract_model_check.py",
+      "id": "present_abstract_model_check_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "monotone_core_check.py",
+      "id": "present_monotone_core_check_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "generated_differential_check.py",
+      "id": "present_generated_differential_check_py",
+      "status": "PASS"
+    },
+    {
+      "detail": "deterministic checkers must write and parse fresh isolated outputs",
+      "id": "fresh_output_verification_chain",
+      "status": "PASS"
+    },
+    {
+      "detail": [
+        "test_missing_fresh_output_is_fail",
+        "test_changed_frozen_field_is_fail",
+        "test_forbidden_format_conflict_is_fail"
+      ],
+      "id": "verification_chain_mutation_tests",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "results/abstract_model_check.json": {
+          "byte_equal": true,
+          "forbidden_frozen_fields": [],
+          "forbidden_generated_fields": [],
+          "frozen_exists": true,
+          "frozen_parse_error": null,
+          "generated_exists": true,
+          "generated_parse_error": null,
+          "semantic_equal": true,
+          "status": "PASS"
+        },
+        "results/generated_differential_check.json": {
+          "byte_equal": true,
+          "forbidden_frozen_fields": [],
+          "forbidden_generated_fields": [],
+          "frozen_exists": true,
+          "frozen_parse_error": null,
+          "generated_exists": true,
+          "generated_parse_error": null,
+          "semantic_equal": true,
+          "status": "PASS"
+        },
+        "results/monotone_core_check.json": {
+          "byte_equal": true,
+          "forbidden_frozen_fields": [],
+          "forbidden_generated_fields": [],
+          "frozen_exists": true,
+          "frozen_parse_error": null,
+          "generated_exists": true,
+          "generated_parse_error": null,
+          "semantic_equal": true,
+          "status": "PASS"
+        }
+      },
+      "id": "one_command_fresh_outputs_recorded",
+      "status": "PASS"
+    },
+    {
+      "detail": 10,
+      "id": "theorem_assumption_matrix",
+      "status": "PASS"
+    },
+    {
+      "detail": 21,
+      "id": "claim_ledger_unique",
+      "status": "PASS"
+    },
+    {
+      "detail": "all claims have paper and maturity fields",
+      "id": "claim_ledger_linked",
+      "status": "PASS"
+    },
+    {
+      "detail": "EMPIRICAL_CAMPAIGN_TERMINATED_OVER_CAP",
+      "id": "resource_campaign_terminated",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "cap": 800000,
+        "lower_bound": 902768
+      },
+      "id": "resource_cap_exceeded",
+      "status": "PASS"
+    },
+    {
+      "detail": false,
+      "id": "performance_claims_disabled",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "current": 46,
+        "recorded": 46,
+        "status": "PASS"
+      },
+      "id": "resource_unit_record_matches_current",
+      "status": "PASS"
+    }
+  ],
+  "mode": "artifact",
+  "scope": "deterministic structural audit; no analyzer, checker, experiment, or test module is imported or executed",
+  "summary": {
+    "checks": 56,
+    "failed": 0,
+    "passed": 56,
+    "status": "PASS"
+  }
+}

@@ -9,6 +9,7 @@ No result is accepted merely because a copied frozen JSON file already exists.
 from __future__ import annotations
 
 import argparse
+import hashlib
 from contextlib import nullcontext
 import json
 import os
@@ -200,6 +201,54 @@ def main() -> int:
         )
         retain("unit_tests", executions["unit_tests"])
 
+        # Keep archived base counts intact; explicitly gate all current APIs.
+        for name, pattern in (("prepared_support", "check_prepared_support.py"),
+                              ("candidate_verification", "check_candidate_verification.py"),
+                              ("information_paths", "check_information_paths.py")):
+            suite_env = dict(env)
+            suite_env["PYTHONPATH"] = os.pathsep.join((str(copy_root / "src"),
+                                                       str(copy_root), str(copy_root / "tests")))
+            executions[name] = run([sys.executable, "-B", "-m", "unittest", "discover",
+                                    "-s", "tests", "-p", pattern, "-v"], copy_root, suite_env)
+            retain(name, executions[name])
+
+        # New query-execution checks are explicit mandatory groups, preserving
+        # the archived base-suite inventory without dropping either mode.
+        for name, flags in (("query_execution", []),
+                            ("optimized_query_execution", ["-O"])):
+            executions[name] = run(
+                [sys.executable, *flags, "-B", "-m", "unittest", "discover",
+                 "-s", "tests", "-p", "check_query_execution.py", "-v"],
+                copy_root, suite_env)
+            retain(name, executions[name])
+
+        path_output = generated_root / "information-paths"
+        executions["same_information"] = run(
+            [sys.executable, "-B", "information_paths_check.py", "--output", str(path_output)],
+            copy_root, env)
+        retain("same_information", executions["same_information"])
+        path_report, path_error = load_json(path_output / "report.json")
+        shipped_path, shipped_error = load_json(source / "results/information-paths/report.json")
+        # Actual runtime metadata varies; no scientific input/output/count is dropped.
+        # JSON typed equality: Boolean true must not compare equal to integer 1.
+        projection = lambda value: json.dumps(
+            {k: v for k, v in value.items() if k != "environment"},
+            sort_keys=True, separators=(",", ":"))
+        path_equal = (isinstance(path_report, dict) and isinstance(shipped_path, dict)
+                      and projection(path_report) == projection(shipped_path))
+        bindings = (path_report or {}).get("environment", {}).get("source_bindings", [])
+        required_bindings = {"src/checker.py", "src/producer.py", "candidate_query_check.py",
+                             "information_paths_check.py", "tests/check_prepared_support.py",
+                             "tests/check_information_paths.py"}
+        bindings_ok = (len(bindings) == len(required_bindings)
+                       and {b.get("path") for b in bindings} == required_bindings)
+        if bindings_ok:
+            for binding in bindings:
+                bindings_ok = bindings_ok and hashlib.sha256((copy_root / binding["path"]).read_bytes()).hexdigest() == binding.get("sha256")
+        same_information_ok = (path_error is None and shipped_error is None
+                               and (path_report or {}).get("status") == "PASS"
+                               and path_equal and bindings_ok)
+
         deterministic_specs = [
             (
                 "abstract_model",
@@ -291,6 +340,7 @@ def main() -> int:
             and abstract.get("status") == "PASS"
             and monotone.get("status") == "PASS"
             and current_unit_tests is not None
+            and same_information_ok
             and not residue
         )
 
@@ -312,6 +362,11 @@ def main() -> int:
             },
             "fresh_result_comparisons": comparisons,
             "current_unit_tests": current_unit_tests,
+            "same_information_comparison": {"status": "PASS" if same_information_ok else "FAIL",
+                                             "scientific_projection_equal": path_equal,
+                                             "actual_source_bindings_valid": bindings_ok,
+                                             "excluded_fields": ["environment"],
+                                             "reason": "Runtime timestamps/versions differ; complete scientific records and actual source bindings are checked."},
             "finite_check_totals_from_fresh_outputs": {
                 "abstract_endpoint_pairs": abstract.get("totals", {}).get(
                     "endpoint_pairs"

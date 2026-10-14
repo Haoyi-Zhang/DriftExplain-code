@@ -1,0 +1,94 @@
+{
+  "bytecode_or_cache_residue": [],
+  "current_unit_tests": 46,
+  "executions": {
+    "abstract_model": {
+      "command": "python abstract_model_check.py --output <isolated-output>/abstract_model_check.json",
+      "exit_status": 0,
+      "raw_output": "raw/abstract_model.txt",
+      "timed_out": false,
+      "wall_seconds": 0.4033154749999994
+    },
+    "generated_differential": {
+      "command": "python generated_differential_check.py --output <isolated-output>/generated_differential_check.json",
+      "exit_status": 0,
+      "raw_output": "raw/generated_differential.txt",
+      "timed_out": false,
+      "wall_seconds": 1.336266834
+    },
+    "monotone_core": {
+      "command": "python monotone_core_check.py --max-atoms 4 --output <isolated-output>/monotone_core_check.json",
+      "exit_status": 0,
+      "raw_output": "raw/monotone_core.txt",
+      "timed_out": false,
+      "wall_seconds": 0.07487675600000188
+    },
+    "static_audit": {
+      "command": "python audit_static.py --root . --output <isolated-output>/static_consistency.json",
+      "exit_status": 0,
+      "raw_output": "raw/static_audit.txt",
+      "timed_out": false,
+      "wall_seconds": 0.17981213999999568
+    },
+    "unit_tests": {
+      "command": "python run_tests.py",
+      "exit_status": 0,
+      "raw_output": "raw/unit_tests.txt",
+      "timed_out": false,
+      "wall_seconds": 3.147491639000002
+    }
+  },
+  "finite_check_totals_from_fresh_outputs": {
+    "abstract_atom_partitions": 37048,
+    "abstract_endpoint_pairs": 6536,
+    "abstract_subset_replays": 192176,
+    "generated_endpoint_pairs": 60,
+    "generated_subset_replays": 1176,
+    "monotone_predicates": 65814,
+    "monotone_theorem_checks": 970
+  },
+  "fresh_result_comparisons": {
+    "results/abstract_model_check.json": {
+      "byte_equal": true,
+      "forbidden_frozen_fields": [],
+      "forbidden_generated_fields": [],
+      "frozen_exists": true,
+      "frozen_parse_error": null,
+      "generated_exists": true,
+      "generated_parse_error": null,
+      "semantic_equal": true,
+      "status": "PASS"
+    },
+    "results/generated_differential_check.json": {
+      "byte_equal": true,
+      "forbidden_frozen_fields": [],
+      "forbidden_generated_fields": [],
+      "frozen_exists": true,
+      "frozen_parse_error": null,
+      "generated_exists": true,
+      "generated_parse_error": null,
+      "semantic_equal": true,
+      "status": "PASS"
+    },
+    "results/monotone_core_check.json": {
+      "byte_equal": true,
+      "forbidden_frozen_fields": [],
+      "forbidden_generated_fields": [],
+      "frozen_exists": true,
+      "frozen_parse_error": null,
+      "generated_exists": true,
+      "generated_parse_error": null,
+      "semantic_equal": true,
+      "status": "PASS"
+    }
+  },
+  "retained_work_directory": "/home/runner/work/_temp/p025-scientific/work",
+  "scope": "isolated-copy unit tests; fresh-output finite checks; strict frozen-result comparison; fresh static audit; residue verification",
+  "static_audit_from_fresh_output": {
+    "checks": 56,
+    "failed": 0,
+    "passed": 56,
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

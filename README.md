@@ -106,8 +106,8 @@ PYTHONPATH=src:.:tests python -B -m unittest discover -s tests -p check_candidat
 python -B candidate_query_check.py --output results/candidate_verification
 ```
 
-The candidate regression is explicitly separate from the retained 46-method
-base receipts and the one-command verifier. The benchmark checks 5,461
+The candidate regression remains separate from the retained 46-method base
+receipts, and is now included in the one-command verifier. The benchmark checks 5,461
 support/candidate pairs over all principal filters through six atoms, and 12
 owned finite-record pairs through 64 atoms. At d=64 and k=1, instrumented hybrid
 counts are 65 for identification plus core replay versus 2 for candidate
@@ -145,6 +145,33 @@ from the latter.  A passing current verification therefore does not certify ever
 historical campaign branch or reopen its terminated resource budget.
 
 ## Main components
+
+`check_structural_certificate` is the structure-visible same-input baseline.
+It scans independently reconstructed final evidence and endpoint atom bodies,
+including sparse deleted-rule identities, without importing producer support.
+The correspondence argument is in `proofs/candidate_verification.md`.
+`results/information-paths/report.json` retains 48 owned pairs, every one of 218
+supplied subset certificates, and 12 predeclared larger pairs. At d=64,k=1,
+identifier/candidate/structural hybrid counts are 65/2/0 and evidence calls are
+67/4/2, with one delta reconstruction each. This is an information-access
+discrimination, not a new query lower bound, timing gain or native validation.
+
+The one-command verifier also gates the six prepared-support, nine
+candidate and seven information-path methods, four query-execution methods
+in both normal and optimized Python, and fresh same-input raw results.
+The archived 46-method receipts remain unchanged. To create a fresh scientific
+packet, run `python -B information_paths_check.py --output ../information-new`;
+both this driver and `candidate_query_check.py` reject existing output directories.
+Actual run environments are retained separately from deterministic scientific
+record comparison; historical over-cap performance findings are not reset.
+The query drivers execute their workload and validate their decisions regardless
+of Python optimization mode. The query-execution methods check actual oracle
+calls and require a disagreement to stop before a success report is written.
+
+OpenAI Codex assisted generation of the structure-visible receiver, invocation-local
+reuse, regression/workflow code and the corresponding method/proof exposition.
+The manuscript records this use in its acknowledgments; finite results are
+from the documented executable checks.
 
 - `src/producer.py` — finite semantics, canonical endpoint delta, structural
   support, certificates, and conservative incremental reuse.

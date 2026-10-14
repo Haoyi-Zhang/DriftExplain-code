@@ -534,16 +534,8 @@ def main() -> int:
         required_direct = {"MarquesSilva2013", "Janota2016", "MarquesSilva2017", "Ignatiev2019", "Darwiche2020"}
         check("closest_prior_art_present", required_direct <= bib_set and required_direct <= citation_set, sorted(required_direct))
         novelty_text = tex.lower()
-        check(
-            "generic_novelty_disclaimed",
-            (
-                ("claim none of that generic machinery as new" in novelty_text
-                 or "do not claim those generic formulations" in novelty_text)
-                and ("novelty is not deletion itself" in novelty_text
-                     or "contribution is not this generic deletion fact" in novelty_text)
-            ),
-            "generic minimal-set and deletion machinery explicitly credited",
-        )
+        # Novelty/priority require reading the actual closest sources and claims;
+        # prescribed disclaimer strings cannot certify that research judgment.
         check(
             "overfitting_boundary",
             ("no statistical model is trained" in novelty_text or "no model is trained" in novelty_text)

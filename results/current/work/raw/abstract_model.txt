@@ -1,0 +1,192 @@
+{
+  "checker_independence": "standard library only; imports no project analyzer, producer, checker, or test module",
+  "configuration": {
+    "endpoint_pair_scope": "ordered non-identical endpoint pairs",
+    "selector_domain_sizes": [
+      2,
+      3
+    ]
+  },
+  "domains": [
+    {
+      "atom_partitions": 112,
+      "domain_size": 2,
+      "failures": [],
+      "nonidentical_endpoint_pairs": 56,
+      "subset_replays": 368
+    },
+    {
+      "atom_partitions": 36936,
+      "domain_size": 3,
+      "failures": [],
+      "nonidentical_endpoint_pairs": 6480,
+      "subset_replays": 191808
+    }
+  ],
+  "negative_controls": {
+    "hidden_visibility_breaks_structural_identification": {
+      "empty_patch": {
+        "actual_sufficient": false,
+        "hidden_new_evidence": [
+          [
+            2,
+            9
+          ]
+        ],
+        "hidden_old_evidence": [
+          [
+            1,
+            7
+          ]
+        ],
+        "predicted_sufficient": true,
+        "structural_equivalence_violated": true
+      },
+      "hidden_final_read": [
+        2
+      ],
+      "new_state": [
+        1,
+        7,
+        9
+      ],
+      "old_state": [
+        0,
+        7,
+        9
+      ],
+      "passed": true,
+      "restored_complete_evidence": {
+        "all_subsets_agree": true,
+        "empty_patch_sufficient": false,
+        "final_read": [
+          0,
+          2
+        ],
+        "new_evidence": [
+          1,
+          9
+        ],
+        "old_evidence": [
+          0,
+          7
+        ],
+        "support": [
+          0
+        ],
+        "support_patch_sufficient": true
+      },
+      "selector_atom_block": [
+        0
+      ],
+      "support": []
+    },
+    "overlapping_write_breaks_upward_closure": {
+      "passed": true,
+      "restored_disjoint_endpoint_blocks": {
+        "evaluations": {
+          "a": false,
+          "a_b": true,
+          "b": false,
+          "empty": false
+        },
+        "upward_principal_filter_restored": true
+      },
+      "sequential_write_evaluations": {
+        "a": false,
+        "a_b": true,
+        "b": true,
+        "empty": true
+      },
+      "upward_closure_violation_observed": true
+    },
+    "unstable_identity_breaks_coordinate_correspondence": {
+      "new_keyed_state": [
+        [
+          "x",
+          2
+        ],
+        [
+          "y",
+          1
+        ]
+      ],
+      "old_keyed_state": [
+        [
+          "x",
+          1
+        ],
+        [
+          "y",
+          2
+        ]
+      ],
+      "passed": true,
+      "restored_stable_identity": {
+        "changed_identities": [
+          "x",
+          "y"
+        ],
+        "correspondence": {
+          "x": "x",
+          "y": "y"
+        },
+        "empty_patch_reaches_new": false,
+        "full_patch_reaches_new": true,
+        "positive_control_passed": true
+      },
+      "unstable_correspondence": {
+        "x": "y",
+        "y": "x"
+      },
+      "unstable_positional_views": {
+        "failure_observed": true,
+        "keyed_endpoints_differ": true,
+        "masked_changes": [],
+        "new": [
+          1,
+          2
+        ],
+        "old": [
+          1,
+          2
+        ]
+      }
+    },
+    "value_only_incomparable_minima": {
+      "executed_predicate_values": {
+        "a": true,
+        "a_b": true,
+        "b": true,
+        "empty": false
+      },
+      "incomparable_minimal_sufficient_sets": [
+        [
+          "a"
+        ],
+        [
+          "b"
+        ]
+      ],
+      "passed": true,
+      "restored_complete_evidence": {
+        "minimal_sufficient_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "unique_least_restored": true
+      }
+    }
+  },
+  "negative_controls_passed": true,
+  "scope": "bounded exhaustive validation of one-selector stratified frames; not a substitute for the paper proof",
+  "status": "PASS",
+  "totals": {
+    "atom_partitions": 37048,
+    "counterexamples": 0,
+    "endpoint_pairs": 6536,
+    "subset_replays": 192176
+  }
+}

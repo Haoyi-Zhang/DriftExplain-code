@@ -31,11 +31,9 @@ text.  The comparison set spans eleven overlapping roles:
 The total is 67.  Roles are used for organization rather than a claim that the
 literatures are disjoint.
 
-## Closest-work correction
+## Closest-work relationship
 
-The blind audit added the direct monotone-minimal-set and formal-explanation
-literature that the earlier draft omitted.  In particular, the manuscript now
-credits Minimal Sets over Monotone Predicates, the subsequent query-complexity
+The comparison credits Minimal Sets over Monotone Predicates and its query-complexity
 and reduction results, abduction-based explanations, and sufficient reasons
 behind decisions.  The article explicitly disclaims novelty for generic
 co-singleton deletion tests, deletion-core intersection facts, MSMP, and

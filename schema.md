@@ -109,7 +109,14 @@ producer could fabricate mutually consistent certificate fields.
 
 ## Acceptance relation and diagnostics
 
-Two public entry points share the exact admission and required-field checks.
+`check_structural_certificate` scans independently reconstructed complete final
+records and endpoint atom bodies, including framed deleted/moved rule identities.
+It compares the supplied witness with the structural read-footprint support.
+Under the same representation theorem it accepts the same least-support
+certificates without hybrid replay. Structure access is excluded by the binary
+oracle bounds; this path does not establish source extraction or timing.
+
+Three public entry points share the exact admission and required-field checks.
 `check_certificate` identifies and replays the deletion core as described below.
 `check_candidate_certificate` instead verifies the supplied W: Q(W) must hold
 and Q(W minus {a}) must fail for every a in W. When W is the full delta, Q(W)

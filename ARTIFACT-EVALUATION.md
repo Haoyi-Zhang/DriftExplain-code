@@ -16,12 +16,19 @@
 7. **Identification versus supplied-candidate verification.** Run the separate
    nine-method `check_candidate_verification.py` regression as documented in
    `REPRODUCIBILITY.md`, then `python -B candidate_query_check.py --output
-   results/candidate_verification`. Inspect the exact contract and proof in
+   ../candidate-verification-new`. Inspect the exact contract and proof in
    `proofs/candidate_verification.md`. Both query algorithms have the same
    principal-filter promise; only verification receives a proposed support.
 
 The complete sequence requires no external dependency and normally finishes in
 seconds on an ordinary CPU.
+
+The current one-command workflow includes all four method groups (46/6/9/7).
+`python -B information_paths_check.py --output ../information-paths-new` compares
+the same complete input against identifier, candidate replay and independently
+implemented structure-visible verification. Its raw records and conditional
+correspondence argument distinguish structure access from the binary-oracle
+promise; zero hybrid calls are not a timing or native-source result.
 
 ## Evidence interpretation
 

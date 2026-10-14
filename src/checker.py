@@ -333,6 +333,9 @@ def _least_witness(
     family: str,
     anchor: str,
     maximum_changes: int,
+    *,
+    changes: list[dict[str, Any]] | None = None,
+    final_result: dict[str, Any] | None = None,
 ) -> list[str]:
     """Recover and replay the deletion core with independent semantics.
 
@@ -348,10 +351,12 @@ def _least_witness(
     repaired by trusting the supplied witness. This algorithm uses d+1 hybrid
     replays.
     """
-    changes = _changes(before, after)
+    # Invocation-local admitted data; never producer/certificate-supplied bodies.
+    changes = _changes(before, after) if changes is None else changes
     if len(changes) > maximum_changes:
         raise ValueError("change bound exceeded")
-    final_result = _family_result(after, family, anchor)
+    final_result = (_family_result(after, family, anchor)
+                    if final_result is None else final_result)
     mandatory = []
     for index, change in enumerate(changes):
         try:
@@ -436,7 +441,7 @@ def check_certificate(
     maximum_changes: int = 12,
 ) -> tuple[bool, str]:
     """Check via full-support identification and core replay (d+1 hybrids)."""
-    return _check_certificate(before, after, certificate, maximum_changes, False)
+    return _check_certificate(before, after, certificate, maximum_changes, "identify")
 
 
 def check_candidate_certificate(
@@ -454,7 +459,51 @@ def check_candidate_certificate(
     called. Under the finite principal-filter theorem this accepts exactly the
     same certificates as check_certificate. See proofs/candidate_verification.md.
     """
-    return _check_certificate(before, after, certificate, maximum_changes, True)
+    return _check_certificate(before, after, certificate, maximum_changes, "candidate")
+
+
+def _structural_witness(changes, final_result, family, anchor):
+    """Read the independently reconstructed complete final record and delta.
+
+    This path is structure-visible, not a structure-blind membership oracle.
+    Sparse omitted rules still have their endpoint-union identities in changes.
+    No producer selector, subset replay or support discovery is called.
+    """
+    if final_result["reason"] == "target_absent":
+        return [change["id"] for change in changes
+                if change["kind"] == "target" and change["anchor"] == anchor]
+    literals = [literal for rule in final_result["rules"]
+                for polarity in ("required", "forbidden") for literal in rule[polarity]]
+    names = {literal["canonical"] for literal in literals}
+    aliases = {observation["alias"] for literal in literals
+               for observation in literal["observations"]}
+
+    def projection(rule):
+        if rule is None or rule["family"] != family: return None
+        return (rule["id"], rule["family"], tuple(rule.get("requires", [])),
+                tuple(rule.get("forbids", [])))
+
+    selected = []
+    for change in changes:
+        kind = change["kind"]
+        observed = (
+            (kind == "target" and change["anchor"] == anchor)
+            or (kind == "rule" and projection(change["old"]) != projection(change["new"]))
+            or (kind == "normalizer" and change["canonical"] in names)
+            or (kind == "program" and change["anchor"] == anchor and change["raw"] in aliases)
+        )
+        if observed: selected.append(change["id"])
+    return selected
+
+
+def check_structural_certificate(before, after, certificate, maximum_changes=12):
+    """Same complete inputs/admission as both replay paths; zero hybrid calls.
+
+    Correctness relies on complete framed evidence and separable endpoint atoms,
+    not on the oracle query promise alone. This is a strong same-information
+    baseline, not a new lower bound or claim of source/production validation.
+    """
+    return _check_certificate(before, after, certificate, maximum_changes, "structure")
 
 
 def _check_certificate(
@@ -462,7 +511,7 @@ def _check_certificate(
     after: dict[str, Any],
     certificate: dict[str, Any],
     maximum_changes: int,
-    candidate_only: bool,
+    support_mode: str,
 ) -> tuple[bool, str]:
     """Shared admission and evidence checks; two distinct support obligations."""
     if not isinstance(certificate, dict):
@@ -521,7 +570,10 @@ def _check_certificate(
         return False, "witness_order"
     if any(item not in change_ids for item in witness):
         return False, "witness_member"
-    if candidate_only:
+    if support_mode == "structure":
+        expected = _structural_witness(changes, right, family, anchor)
+        return (True, "accepted") if witness == expected else (False, "witness_minimality")
+    if support_mode == "candidate":
         def query(selected: frozenset[str]) -> bool:
             operations = [entry for entry in changes if entry["id"] in selected]
             hybrid = _patch(before, operations)
@@ -533,7 +585,8 @@ def _check_certificate(
             return False, "witness_consistency"
         return (True, "accepted") if verified else (False, "witness_minimality")
     try:
-        expected = _least_witness(before, after, family, anchor, declared_bound)
+        expected = _least_witness(before, after, family, anchor, declared_bound,
+                                  changes=changes, final_result=right)
     except ValueError:
         return False, "witness_bound"
     except AssertionError:

@@ -24,12 +24,12 @@ and Unix; semantic and exact-byte comparisons remain required.
 
 ## Individual commands
 
-Candidate verification has an additional separate regression; the retained base
-suite and one-command receipts do not include it:
+Candidate verification has an explicit regression; historical base and
+one-command receipts do not include it, while the current verifier does:
 
 ```bash
 PYTHONPATH=src:.:tests python -B -m unittest discover -s tests -p check_candidate_verification.py -v
-python -B candidate_query_check.py --output results/candidate_verification
+python -B candidate_query_check.py --output ../candidate-verification-new
 ```
 
 On Windows use `src;.;tests` for `PYTHONPATH`. Expected: nine tests pass; the
@@ -71,6 +71,19 @@ complete subset enumeration, yielding 365 minimum comparisons.  Their subset
 replay totals are 2,302 and 1,753, respectively.
 
 ## Determinism and interpretation
+
+The current one-command verifier separately gates 46 base, six prepared-support,
+nine candidate and seven information-path methods. It generates fresh
+`information_paths_check.py` results, compares all scientific inputs/outputs and
+counts with `results/information-paths/report.json`, and validates actual source
+bindings. Only environment metadata varies. To repeat that comparison alone:
+
+```bash
+python -B information_paths_check.py --output ../information-paths-new
+```
+
+The output directory must not exist. Both query/comparison drivers refuse
+existing outputs; archived evidence is not a scratch directory.
 
 The generated check uses five fixed seeds recorded in its JSON output.  The two
 bounded enumerators traverse finite spaces in canonical order.  The one-command

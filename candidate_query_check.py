@@ -21,6 +21,12 @@ import checker
 import producer
 
 
+def require(condition, detail=None):
+    """Keep workload execution and result validation enabled under Python -O."""
+    if not condition:
+        raise AssertionError(detail)
+
+
 def subsets(universe):
     for bits in itertools.product((False, True), repeat=len(universe)):
         yield frozenset(a for a, selected in zip(universe, bits) if selected)
@@ -43,8 +49,8 @@ def boolean_regression(max_atoms=6):
                 discovery_calls.append(selected)
                 return hidden <= selected
 
-            assert identify(universe, discover_query) == hidden
-            assert len(discovery_calls) == d
+            require(identify(universe, discover_query) == hidden)
+            require(len(discovery_calls) == d)
             identification_queries += len(discovery_calls)
             for candidate in subsets(universe):
                 calls = []
@@ -55,18 +61,18 @@ def boolean_regression(max_atoms=6):
 
                 decision = checker.verify_candidate_witness(
                     universe, sorted(candidate), query)
-                assert decision == (candidate == hidden), (d, hidden, candidate)
+                require(decision == (candidate == hidden), (d, hidden, candidate))
                 bound = d if len(candidate) == d else len(candidate) + 1
-                assert len(calls) <= bound
+                require(len(calls) <= bound)
                 if decision:
-                    assert len(calls) == bound
+                    require(len(calls) == bound)
                     accepted += 1
                 cases += 1
                 verification_queries += len(calls)
     # Upward closure alone does not make candidate minimality into leastness.
     disjunction = lambda selected: bool(selected & {"x", "y"})
-    assert checker.verify_candidate_witness(["x", "y"], ["x"], disjunction)
-    assert checker.verify_candidate_witness(["x", "y"], ["y"], disjunction)
+    require(checker.verify_candidate_witness(["x", "y"], ["x"], disjunction))
+    require(checker.verify_candidate_witness(["x", "y"], ["y"], disjunction))
     return {"maximum_atoms": max_atoms, "support_candidate_pairs": cases,
             "accepted_exact_supports": accepted,
             "identification_queries_across_supports": identification_queries,
@@ -92,7 +98,7 @@ def measured_check(api, old, new, certificate):
         with mock.patch.object(checker, "_family_result",
                                wraps=checker._family_result) as evaluations:
             decision = api(old, new, certificate, 64)
-            assert decision == (True, "accepted"), decision
+            require(decision == (True, "accepted"), decision)
             return patches.call_count, evaluations.call_count
 
 
@@ -103,17 +109,17 @@ def finite_regression():
             old, new = finite_pair(d, k)
             snapshot = copy.deepcopy((old, new))
             certificate = producer.make_certificate(old, new, "f", "a", 64)
-            assert len(certificate["delta"]) == d
-            assert len(certificate["witness"]) == k
+            require(len(certificate["delta"]) == d)
+            require(len(certificate["witness"]) == k)
             discovery, discovery_evals = measured_check(
                 checker.check_certificate, old, new, certificate)
             verification, verification_evals = measured_check(
                 checker.check_candidate_certificate, old, new, certificate)
-            assert discovery == d + 1
-            assert verification == (d if k == d else k + 1)
-            assert discovery_evals == discovery + 3  # two endpoints + core target
-            assert verification_evals == verification + 2
-            assert (old, new) == snapshot
+            require(discovery == d + 1)
+            require(verification == (d if k == d else k + 1))
+            require(discovery_evals == discovery + 2)  # same two admitted endpoints
+            require(verification_evals == verification + 2)
+            require((old, new) == snapshot)
             rows.append({"delta_atoms": d, "support_atoms": k,
                          "identification_checker_hybrid_replays": discovery,
                          "candidate_verifier_hybrid_replays": verification,
@@ -124,9 +130,11 @@ def finite_regression():
 
 
 def run(output):
+    if output.exists():
+        raise ValueError("output directory must not exist")
     boolean = boolean_regression()
     rows = finite_regression()
-    output.mkdir(parents=True, exist_ok=True)
+    output.mkdir(parents=True, exist_ok=False)
     with (output / "finite_query_counts.csv").open("w", encoding="utf-8", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
         writer.writeheader()
