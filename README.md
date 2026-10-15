@@ -189,10 +189,7 @@ The query drivers execute their workload and validate their decisions regardless
 of Python optimization mode. The query-execution methods check actual oracle
 calls and require a disagreement to stop before a success report is written.
 
-OpenAI Codex assisted generation of the structure-visible receiver, invocation-local
-reuse, regression/workflow code and the corresponding method/proof exposition.
-The manuscript records this use in its acknowledgments; finite results are
-from the documented executable checks.
+Finite results are from the documented executable checks.
 
 - `src/producer.py` — finite semantics, canonical endpoint delta, structural
   support, certificates, and conservative incremental reuse.
