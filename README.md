@@ -41,11 +41,28 @@ authenticate cached values.
 
 ## One-command verification
 
-From this directory:
+Requirements: Python 3.10 or newer, using only the standard library. No package
+installation, network access, external solver or source corpus is needed. Run
+from this directory. To keep the copy, report and generated evidence outside
+the checkout, choose a fresh work directory and a separate report path:
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python verify_artifact.py
+OUT="$(mktemp -d)"
+PYTHONDONTWRITEBYTECODE=1 PYTHONHASHSEED=0 python -B verify_artifact.py \
+  --work-dir "$OUT/work" --output "$OUT/verification.json"
 ```
+
+On Windows PowerShell, the equivalent is:
+
+```powershell
+$env:PYTHONDONTWRITEBYTECODE = '1'
+$env:PYTHONHASHSEED = '0'
+$out = Join-Path ([System.IO.Path]::GetTempPath()) ([guid]::NewGuid().ToString())
+python -B verify_artifact.py --work-dir "$out/work" --output "$out/verification.json"
+```
+
+Expected final status: `PASS`. The report lists the retained work directory;
+`work/raw/` holds test logs and `work/regenerated/` holds fresh finite results.
 
 The command copies the artifact to an isolated directory and runs the base
 finite gates:
@@ -103,8 +120,12 @@ artifact root (on Windows, use `;` in `PYTHONPATH`):
 
 ```bash
 PYTHONPATH=src:.:tests python -B -m unittest discover -s tests -p check_candidate_verification.py -v
-python -B candidate_query_check.py --output results/candidate_verification
+python -B candidate_query_check.py --output ../candidate-verification-new
 ```
+
+The output directory must not exist. `results/candidate_verification/` is
+retained evidence, not a writable destination for a new run. The new directory
+receives `summary.json` and `finite_query_counts.csv`.
 
 The candidate regression remains separate from the retained 46-method base
 receipts, and is now included in the one-command verifier. The benchmark checks 5,461
